@@ -3,7 +3,8 @@ Seed data script to populate the database with attractions.
 Contains ~60 real attractions across Goa, Jaipur, and Manali.
 """
 import random
-from models import Attraction
+from models import Attraction, User, TravelerProfile
+from auth import hash_password
 
 # Helper to generate random recommended archetypes
 def get_archetypes(primary, *others):
@@ -297,15 +298,41 @@ ALL_ATTRACTIONS = GOA_ATTRACTIONS + JAIPUR_ATTRACTIONS + MANALI_ATTRACTIONS
 def seed_database(db_session):
     """Inserts seed attractions into the database if empty."""
     count = db_session.query(Attraction).count()
-    if count > 0:
-        print(f"Database already has {count} attractions. Skipping seed.")
-        return
-
-    print(f"Seeding database with {len(ALL_ATTRACTIONS)} attractions...")
-    
-    for attr_data in ALL_ATTRACTIONS:
-        attraction = Attraction(**attr_data)
-        db_session.add(attraction)
+    if count == 0:
+        print(f"Seeding database with {len(ALL_ATTRACTIONS)} attractions...")
+        for attr_data in ALL_ATTRACTIONS:
+            attraction = Attraction(**attr_data)
+            db_session.add(attraction)
+        db_session.commit()
+        print("Attractions seed complete!")
+    else:
+        print(f"Database already has {count} attractions. Skipping attraction seed.")
         
-    db_session.commit()
-    print("Seed complete!")
+    # Seed a demo user for Render free tier restarts
+    user_count = db_session.query(User).count()
+    if user_count == 0:
+        print("Seeding demo user...")
+        demo_user = User(
+            email="demo@example.com",
+            username="demouser",
+            full_name="Demo User",
+            hashed_password=hash_password("password123")
+        )
+        db_session.add(demo_user)
+        db_session.commit()
+        db_session.refresh(demo_user)
+        
+        # Add a default profile for them
+        demo_profile = TravelerProfile(
+            user_id=demo_user.id,
+            archetype="High-Energy Social Explorer",
+            archetype_explanation="You love fast-paced travel, bustling crowds, and exciting nightlife.",
+            travel_pace=5, budget_per_day=4, crowd_tolerance=5,
+            food_adventurousness=4, cultural_curiosity=2, adventure_appetite=4,
+            climate_tolerance=3, photography_interest=4, nightlife_interest=5,
+            relaxation_preference=1, luxury_preference=3, social_preference=5,
+            planning_spontaneity=4, walking_tolerance=4, local_experience=2
+        )
+        db_session.add(demo_profile)
+        db_session.commit()
+        print("Demo user created successfully! Email: demo@example.com / Password: password123")
