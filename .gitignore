@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Database
+*.db
+*.sqlite3
+
+# Models
+backend/ml/models/*.joblib
+backend/ml/models/*.pkl
+
+# Frontend build
+dist/
+build/
+.vite/
+
+# OS files
+.DS_Store
+Thumbs.db

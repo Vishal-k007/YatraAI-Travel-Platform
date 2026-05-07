@@ -1,0 +1,165 @@
+"""
+Itineraries API Routes.
+Orchestrates ML matching and Route Optimization to generate personalized itineraries.
+"""
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from typing import List
+
+from database import get_db
+from models import User, Attraction, Itinerary, ItineraryDay, ItinerarySlot, TravelerProfile
+from schemas import ItineraryRequest, ItineraryResponse, ItineraryListItem
+from auth import get_current_user
+from ml.match_scorer import match_scorer
+from ml.optimizer import route_optimizer
+
+router = APIRouter()
+
+@router.post("/generate", response_model=ItineraryResponse)
+def generate_itinerary(
+    req: ItineraryRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Core AI Generation Endpoint.
+    1. Gets user profile.
+    2. Scores all attractions in requested city using ML match_scorer.
+    3. Passes scored attractions to Route Optimizer to build the plan.
+    4. Saves to database and returns.
+    """
+    # 1. Get profile
+    profile = db.query(TravelerProfile).filter(TravelerProfile.user_id == current_user.id).first()
+    if not profile:
+        raise HTTPException(status_code=400, detail="Must complete personality quiz before generating itinerary")
+        
+    profile_dict = {c.name: getattr(profile, c.name) for c in profile.__table__.columns}
+    
+    # 2. Get and score attractions
+    attractions = db.query(Attraction).filter(Attraction.city == req.city).all()
+    if not attractions:
+        raise HTTPException(status_code=404, detail=f"No attractions found for city: {req.city}")
+        
+    scored_attractions = []
+    for attr in attractions:
+        attr_dict = {c.name: getattr(attr, c.name) for c in attr.__table__.columns}
+        match_res = match_scorer.calculate_match_score(profile_dict, attr_dict)
+        scored_attractions.append({
+            "attraction": attr_dict,
+            "score": match_res["score"],
+            "reason": match_res["reason"]
+        })
+        
+    # 3. Optimize Route
+    try:
+        plan = route_optimizer.generate_itinerary(
+            city=req.city,
+            num_days=req.num_days,
+            user_profile=profile_dict,
+            scored_attractions=scored_attractions,
+            budget_limit=req.budget_total
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Optimization failed: {str(e)}")
+        
+    # 4. Save to Database
+    title = f"{req.num_days}-Day Personalized {req.city} Adventure"
+    
+    db_itinerary = Itinerary(
+        user_id=current_user.id,
+        city=req.city,
+        num_days=req.num_days,
+        total_budget_inr=req.budget_total,
+        title=title,
+        total_estimated_cost=plan["total_estimated_cost"],
+        total_attractions=plan["total_attractions"],
+        avg_daily_energy=plan["avg_daily_energy"],
+        match_score=sum(s["score"] for s in scored_attractions[:10])/10 if scored_attractions else 0,
+        itinerary_data=plan["days"],
+        recommendations_explanation=plan["recommendations_explanation"]
+    )
+    db.add(db_itinerary)
+    db.commit()
+    db.refresh(db_itinerary)
+    
+    # Save Days and Slots (for relational querying if needed, though JSON is sent to frontend)
+    for d_data in plan["days"]:
+        db_day = ItineraryDay(
+            itinerary_id=db_itinerary.id,
+            day_number=d_data["day_number"],
+            date_label=d_data["date_label"],
+            total_energy=d_data["total_energy"],
+            total_cost=d_data["total_cost"],
+            total_travel_time_mins=d_data["total_travel_time_mins"],
+            theme=d_data["theme"]
+        )
+        db.add(db_day)
+        db.commit()
+        db.refresh(db_day)
+        
+        for s_data in d_data["slots"]:
+            db_slot = ItinerarySlot(
+                day_id=db_day.id,
+                **{k: v for k, v in s_data.items() if k in ItinerarySlot.__table__.columns.keys() and k != 'id'}
+            )
+            db.add(db_slot)
+        db.commit()
+        
+    # 5. Build full response object matching ItineraryResponse schema
+    response_data = {
+        "id": db_itinerary.id,
+        "city": db_itinerary.city,
+        "num_days": db_itinerary.num_days,
+        "title": db_itinerary.title,
+        "total_estimated_cost": db_itinerary.total_estimated_cost,
+        "total_attractions": db_itinerary.total_attractions,
+        "avg_daily_energy": db_itinerary.avg_daily_energy,
+        "match_score": db_itinerary.match_score,
+        "days": plan["days"],
+        "recommendations_explanation": db_itinerary.recommendations_explanation,
+        "warnings": plan.get("warnings", []),
+        "created_at": db_itinerary.created_at
+    }
+    
+    return response_data
+
+@router.get("/", response_model=List[ItineraryListItem])
+def list_user_itineraries(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """List all itineraries generated by the current user."""
+    return db.query(Itinerary).filter(Itinerary.user_id == current_user.id).order_by(Itinerary.created_at.desc()).all()
+
+@router.get("/{itinerary_id}", response_model=ItineraryResponse)
+def get_itinerary(
+    itinerary_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Get full details of a specific itinerary."""
+    itinerary = db.query(Itinerary).filter(
+        Itinerary.id == itinerary_id,
+        Itinerary.user_id == current_user.id
+    ).first()
+    
+    if not itinerary:
+        raise HTTPException(status_code=404, detail="Itinerary not found")
+        
+    # Format the DB response to match the heavily nested JSON schema
+    response_data = {
+        "id": itinerary.id,
+        "city": itinerary.city,
+        "num_days": itinerary.num_days,
+        "title": itinerary.title,
+        "total_estimated_cost": itinerary.total_estimated_cost,
+        "total_attractions": itinerary.total_attractions,
+        "avg_daily_energy": itinerary.avg_daily_energy,
+        "match_score": itinerary.match_score,
+        "days": itinerary.itinerary_data, # Use the JSON cache
+        "recommendations_explanation": itinerary.recommendations_explanation,
+        "warnings": [],
+        "created_at": itinerary.created_at
+    }
+    
+    return response_data
