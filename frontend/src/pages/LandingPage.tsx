@@ -19,31 +19,31 @@ const LandingPage: React.FC = () => {
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         {/* Background gradient blob */}
         <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/3">
-          <div className="w-[600px] h-[600px] bg-primary-400/20 rounded-full blur-3xl"></div>
+          <div className="w-[600px] h-[600px] bg-amber-400/20 rounded-full blur-3xl"></div>
         </div>
         <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3">
-          <div className="w-[500px] h-[500px] bg-blue-400/20 rounded-full blur-3xl"></div>
+          <div className="w-[500px] h-[500px] bg-rose-400/20 rounded-full blur-3xl"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div {...fadeIn}>
-              <span className="inline-block py-1 px-3 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 text-sm font-semibold tracking-wider mb-6">
-                AI-POWERED TRAVEL PLANNING
+              <span className="inline-block py-1 px-3 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-sm font-semibold tracking-wider mb-6">
+                STRESS-FREE TRAVEL PLANNING
               </span>
               <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-slate-900 dark:text-white mb-8 leading-tight">
-                Stop traveling like <br/> everyone else.
+                Plan less. <br/> Experience more.
               </h1>
               <p className="text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-                YatraAI uses advanced Machine Learning to analyze your personality and build highly personalized itineraries for Indian destinations.
+                We get to know your vibe and magically put together trips that feel just right for you. No stress, just good times.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to={isAuthenticated ? "/plan" : "/register"} className="btn-primary text-lg px-8 py-4 w-full sm:w-auto flex items-center justify-center shadow-lg shadow-primary-500/30">
-                  Start Your Journey <ChevronRight className="ml-2 w-5 h-5" />
+                  Let's Go <ChevronRight className="ml-2 w-5 h-5" />
                 </Link>
                 <Link to="/explore" className="btn-secondary text-lg px-8 py-4 w-full sm:w-auto flex items-center justify-center">
-                  Explore Destinations
+                  Look Around
                 </Link>
               </div>
             </motion.div>
@@ -55,31 +55,31 @@ const LandingPage: React.FC = () => {
       <section className="py-20 bg-white dark:bg-dark-surface border-t border-slate-100 dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">The Engine Behind the Magic</h2>
-            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Our platform isn't just a basic filter. It's powered by four distinct intelligent layers to craft your perfect trip.</p>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">How we keep it chill</h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">We do all the heavy lifting behind the scenes so you don't have to. Here's how we make your trip perfect.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 icon: <Brain className="w-8 h-8 text-indigo-500" />,
-                title: "Personality Profiling",
-                desc: "K-Means clustering algorithm classifies your travel style based on 15 unique psychological traits."
+                title: "Getting to Know You",
+                desc: "We learn what makes you tick so we can suggest things you'll actually enjoy."
               },
               {
-                icon: <MapPin className="w-8 h-8 text-primary-500" />,
-                title: "Attraction Intelligence",
-                desc: "A rich database of curated Indian spots scored across dimensions like intensity, culture, and crowds."
+                icon: <MapPin className="w-8 h-8 text-amber-500" />,
+                title: "Curated Spots",
+                desc: "We know all the best spots, from quiet hidden gems to the main attractions."
               },
               {
-                icon: <Zap className="w-8 h-8 text-amber-500" />,
-                title: "Match Scoring",
-                desc: "Random Forest ML models predict your exact compatibility score with every single attraction."
+                icon: <Zap className="w-8 h-8 text-orange-500" />,
+                title: "Vibe Matching",
+                desc: "Our smart matching ensures you only see places that fit your exact mood."
               },
               {
-                icon: <Compass className="w-8 h-8 text-blue-500" />,
-                title: "Route Optimization",
-                desc: "Smart routing algorithms balance your daily energy levels while minimizing travel distances."
+                icon: <Compass className="w-8 h-8 text-rose-500" />,
+                title: "Easy Routing",
+                desc: "We map it all out so you can just enjoy the ride, without burning out."
               }
             ].map((feature, idx) => (
               <motion.div 
@@ -106,8 +106,8 @@ const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Supported Destinations</h2>
-              <p className="text-slate-600 dark:text-slate-400">Currently modeling highly detailed data for three iconic regions.</p>
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Where to next?</h2>
+              <p className="text-slate-600 dark:text-slate-400">Check out our favorite spots to escape to right now.</p>
             </div>
           </div>
 

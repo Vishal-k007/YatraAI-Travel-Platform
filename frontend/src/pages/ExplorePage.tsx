@@ -69,8 +69,8 @@ const ExplorePage: React.FC = () => {
           </h1>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl">
             {user?.has_profile 
-              ? "Discover places scored specifically for your travel archetype by our ML engine."
-              : "Browse top attractions across India. Take the personality quiz to get personalized match scores!"}
+              ? "Discover spots hand-picked for your unique vibe."
+              : "Browse top spots across India. Take the quick vibe check to see what matches your style!"}
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -81,7 +81,7 @@ const ExplorePage: React.FC = () => {
               <input
                 type="text"
                 className="input-field pl-10 h-12 shadow-sm"
-                placeholder="Search by name or category (e.g., Beach, Temple)..."
+                placeholder="Find your next favorite spot (e.g., Beach, Cafe)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />

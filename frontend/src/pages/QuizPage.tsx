@@ -83,11 +83,11 @@ const QuizPage: React.FC = () => {
           <div className="mx-auto w-20 h-20 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mb-6">
             <Brain className="h-10 w-10 text-primary-600 dark:text-primary-400" />
           </div>
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Profile Generated!</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">Our AI has analyzed your travel DNA.</p>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Vibe Check Complete!</h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">We've got a good feel for your travel style.</p>
           
           <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-inner mb-8 border border-slate-100 dark:border-slate-700">
-            <h3 className="text-sm font-semibold tracking-wider text-primary-600 uppercase mb-2">Your Traveler Archetype</h3>
+            <h3 className="text-sm font-semibold tracking-wider text-primary-600 uppercase mb-2">Your Travel Vibe</h3>
             <div className="text-4xl font-display font-bold text-slate-900 dark:text-white mb-4">
               {result.archetype}
             </div>
@@ -112,8 +112,8 @@ const QuizPage: React.FC = () => {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Travel Personality Assessment</h1>
-          <p className="text-slate-600 dark:text-slate-400">Answer {QUESTIONS.length} quick questions so our AI can map your unique travel style.</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Travel Vibe Check</h1>
+          <p className="text-slate-600 dark:text-slate-400">Just {QUESTIONS.length} quick questions to help us match you with the perfect spots.</p>
         </div>
 
         {/* Progress Bar */}
@@ -200,7 +200,7 @@ const QuizPage: React.FC = () => {
               disabled={isSubmitting || Object.keys(answers).length < QUESTIONS.length}
               className="btn-primary flex items-center px-8"
             >
-              {isSubmitting ? 'Analyzing...' : 'Analyze My Profile'}
+              {isSubmitting ? 'Analyzing...' : 'Find My Vibe'}
               {!isSubmitting && <Brain className="w-4 h-4 ml-2" />}
             </button>
           ) : (

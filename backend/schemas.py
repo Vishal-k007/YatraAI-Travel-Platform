@@ -2,9 +2,10 @@
 Pydantic schemas for request/response validation.
 Provides type-safe data contracts between frontend and backend.
 """
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional, List, Dict, Any
 from datetime import datetime
+import re
 
 
 # ============================================================
@@ -15,8 +16,23 @@ class UserRegister(BaseModel):
     """Schema for user registration request."""
     email: str = Field(..., min_length=5, max_length=255, description="User email")
     username: str = Field(..., min_length=3, max_length=100, description="Unique username")
-    password: str = Field(..., min_length=6, max_length=128, description="Password (min 6 chars)")
+    password: str = Field(..., min_length=8, max_length=128, description="Password (min 8 chars)")
     full_name: Optional[str] = Field(None, max_length=200, description="Full name")
+
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v: str) -> str:
+        if len(v) < 8:
+            raise ValueError('Password must be at least 8 characters long')
+        if not re.search(r'[A-Z]', v):
+            raise ValueError('Password must contain at least one uppercase letter')
+        if not re.search(r'[a-z]', v):
+            raise ValueError('Password must contain at least one lowercase letter')
+        if not re.search(r'[0-9]', v):
+            raise ValueError('Password must contain at least one number')
+        if not re.search(r'[^A-Za-z0-9]', v):
+            raise ValueError('Password must contain at least one special character')
+        return v
 
 
 class UserLogin(BaseModel):

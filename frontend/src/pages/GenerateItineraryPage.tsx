@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../api/client';
-import { Plane, MapPin, Calendar, IndianRupee, Sparkles, AlertCircle } from 'lucide-react';
+import { Palmtree, MapPin, Calendar, IndianRupee, Sparkles, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const CITIES = [
@@ -50,10 +50,10 @@ const GenerateItineraryPage: React.FC = () => {
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-center">
             <Sparkles className="w-8 h-8 text-primary-500 mr-3" />
-            Design Your Next Adventure
+            Plan Your Perfect Getaway
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Our AI will match your personality profile against hundreds of data points to craft the perfect daily plan.
+            We'll take your preferences and build a chill, stress-free plan just for you.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ const GenerateItineraryPage: React.FC = () => {
           <div className="grid md:grid-cols-5 h-full">
             
             {/* Left Side: Information */}
-            <div className="md:col-span-2 bg-gradient-to-br from-primary-600 to-indigo-700 p-10 text-white flex flex-col justify-between">
+            <div className="md:col-span-2 bg-gradient-to-br from-amber-500 to-orange-600 p-10 text-white flex flex-col justify-between">
               <div>
                 <h3 className="text-2xl font-bold mb-6">How it works</h3>
                 <ul className="space-y-6">
@@ -86,8 +86,8 @@ const GenerateItineraryPage: React.FC = () => {
                   <li className="flex">
                     <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-4 shrink-0">3</div>
                     <div>
-                      <h4 className="font-semibold text-lg">AI Generation</h4>
-                      <p className="text-primary-100 text-sm mt-1">We route-optimize and energy-balance a custom plan matching your archetype.</p>
+                      <h4 className="font-semibold text-lg">Smart Planning</h4>
+                      <p className="text-primary-100 text-sm mt-1">We create a smooth, easy-going route that perfectly matches your vibe.</p>
                     </div>
                   </li>
                 </ul>
@@ -187,11 +187,11 @@ const GenerateItineraryPage: React.FC = () => {
                     {loading ? (
                       <span className="flex items-center">
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-3"></div>
-                        Generating AI Itinerary...
+                        Putting together your trip...
                       </span>
                     ) : (
                       <span className="flex items-center">
-                        Generate Magic Itinerary <Plane className="w-5 h-5 ml-2" />
+                        Plan My Trip <Palmtree className="w-5 h-5 ml-2" />
                       </span>
                     )}
                   </button>

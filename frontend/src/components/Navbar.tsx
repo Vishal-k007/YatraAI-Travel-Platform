@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Plane, User as UserIcon, LogOut, Compass } from 'lucide-react';
+import { Palmtree, User as UserIcon, LogOut, Compass } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, user, logout } = useAuth();
@@ -12,8 +12,8 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                <Plane className="h-5 w-5 text-white" />
+              <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center shadow-md shadow-orange-500/20">
+                <Palmtree className="h-5 w-5 text-white" />
               </div>
               <span className="font-display font-bold text-xl tracking-tight text-slate-900 dark:text-white">
                 YatraAI

@@ -66,9 +66,9 @@ const DashboardPage: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-dark-surface p-6 rounded-2xl border border-slate-100 dark:border-dark-border shadow-sm">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Welcome back, {user?.full_name || user?.username}!</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Good to see you again, {user?.full_name || user?.username}!</h1>
             <p className="text-slate-500 dark:text-slate-400 mt-1 flex items-center">
-              Your Traveler Archetype: <span className="ml-2 px-2 py-0.5 rounded text-xs font-semibold bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400">{user?.archetype || 'Pending'}</span>
+              Your Travel Vibe: <span className="ml-2 px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">{user?.archetype || 'Pending'}</span>
             </p>
           </div>
           <div className="flex gap-3">
@@ -81,21 +81,20 @@ const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Top Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.div initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}} transition={{delay: 0.1}} className="bg-white dark:bg-dark-surface p-6 rounded-2xl border border-slate-100 dark:border-dark-border shadow-sm flex items-center">
-            <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-4">
-              <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mr-4">
+              <Calendar className="w-6 h-6 text-amber-600 dark:text-amber-400" />
             </div>
             <div>
-              <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">My Itineraries</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">My Escapes</p>
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{itineraries.length}</h3>
             </div>
           </motion.div>
           
           <motion.div initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}} transition={{delay: 0.2}} className="bg-white dark:bg-dark-surface p-6 rounded-2xl border border-slate-100 dark:border-dark-border shadow-sm flex items-center">
-            <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mr-4">
-              <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
+            <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mr-4">
+              <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400" />
             </div>
             <div>
               <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Avg Trip Length</p>
@@ -104,8 +103,8 @@ const DashboardPage: React.FC = () => {
           </motion.div>
 
           <motion.div initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}} transition={{delay: 0.3}} className="bg-white dark:bg-dark-surface p-6 rounded-2xl border border-slate-100 dark:border-dark-border shadow-sm flex items-center">
-            <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mr-4">
-              <MapPin className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+            <div className="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center mr-4">
+              <MapPin className="w-6 h-6 text-rose-600 dark:text-rose-400" />
             </div>
             <div>
               <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Top Global City</p>
@@ -120,14 +119,14 @@ const DashboardPage: React.FC = () => {
           {/* Main Content: Itinerary List */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Your Saved Trips</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Your Saved Escapes</h2>
             </div>
 
             {itineraries.length === 0 ? (
               <div className="bg-white dark:bg-dark-surface border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-12 text-center">
                 <MapPin className="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600 mb-4" />
                 <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">No trips planned yet</h3>
-                <p className="text-slate-500 dark:text-slate-400 mb-6">Create your first AI-optimized itinerary today.</p>
+                <p className="text-slate-500 dark:text-slate-400 mb-6">Ready to plan your first getaway?</p>
                 <Link to="/plan" className="btn-primary">Start Planning</Link>
               </div>
             ) : (
@@ -202,10 +201,10 @@ const DashboardPage: React.FC = () => {
             </div>
             
             {/* Quick Action Card */}
-            <div className="bg-gradient-to-br from-primary-600 to-indigo-700 p-6 rounded-2xl shadow-lg text-white">
-              <h3 className="text-lg font-bold mb-2">Want to refine your profile?</h3>
-              <p className="text-primary-100 text-sm mb-4">You can retake the personality quiz anytime to update your travel archetype.</p>
-              <Link to="/quiz" className="inline-block px-4 py-2 bg-white text-primary-700 text-sm font-semibold rounded-lg shadow hover:bg-slate-50 transition-colors">
+            <div className="bg-gradient-to-br from-amber-500 to-orange-600 p-6 rounded-2xl shadow-lg text-white">
+              <h3 className="text-lg font-bold mb-2">Vibes changed?</h3>
+              <p className="text-amber-100 text-sm mb-4">Retake the quick quiz anytime to update your travel preferences.</p>
+              <Link to="/quiz" className="inline-block px-4 py-2 bg-white text-amber-700 text-sm font-semibold rounded-lg shadow hover:bg-slate-50 transition-colors">
                 Retake Quiz
               </Link>
             </div>
