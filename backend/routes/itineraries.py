@@ -57,7 +57,9 @@ def generate_itinerary(
             num_days=req.num_days,
             user_profile=profile_dict,
             scored_attractions=scored_attractions,
-            budget_limit=req.budget_total
+            budget_limit=req.budget_total,
+            stay_budget=req.stay_budget_per_night,
+            food_budget=req.food_budget_per_day
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Optimization failed: {str(e)}")

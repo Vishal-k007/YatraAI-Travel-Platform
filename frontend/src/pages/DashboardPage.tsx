@@ -9,7 +9,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip } 
 interface ItineraryItem {
   id: number;
   city: string;
-  num_days: int;
+  num_days: number;
   title: string;
   total_estimated_cost: number;
   total_attractions: number;
@@ -177,7 +177,7 @@ const DashboardPage: React.FC = () => {
                         paddingAngle={5}
                         dataKey="value"
                       >
-                        {cityData.map((entry, index) => (
+                        {cityData.map((_, index) => (
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>

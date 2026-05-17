@@ -28,3 +28,6 @@ RANDOM_STATE = 42
 
 # --- Supported Cities ---
 SUPPORTED_CITIES = ["Goa", "Jaipur", "Manali"]
+
+# --- Google Maps / Places API (optional, for official place photos) ---
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY") or os.getenv("GOOGLE_API_KEY")

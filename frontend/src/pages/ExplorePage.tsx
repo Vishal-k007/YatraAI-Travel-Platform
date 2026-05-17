@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import apiClient from '../api/client';
-import { MapPin, Search, Compass, IndianRupee, Heart, Filter, Star, Sparkles } from 'lucide-react';
+import { MapPin, Search, Compass, IndianRupee, Heart, Filter, Star, Sparkles, X, ChevronLeft, ChevronRight, User as UserIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
+
+interface Review {
+  user: string;
+  rating: number;
+  text: string;
+  date: string;
+}
 
 interface Attraction {
   id: number;
@@ -10,6 +17,10 @@ interface Attraction {
   city: string;
   category: string;
   description: string;
+  image_url: string;
+  image_urls: string[];
+  reviews: Review[];
+  cost_breakdown: Record<string, any>;
   cost_estimate_inr: number;
   avg_visit_duration_hours: number;
   best_visiting_time: string;
@@ -18,11 +29,28 @@ interface Attraction {
   match_reason: string | null;
 }
 
+const PLACEHOLDER_GRADIENT: Record<string, string> = {
+  Beach: 'from-blue-400 to-cyan-300',
+  Heritage: 'from-amber-600 to-orange-400',
+  Nature: 'from-green-500 to-emerald-400',
+  Adventure: 'from-red-500 to-orange-500',
+  Shopping: 'from-pink-500 to-rose-400',
+  Nightlife: 'from-purple-600 to-indigo-500',
+  Culture: 'from-teal-500 to-cyan-400',
+};
+
+function primaryImage(attr: Attraction): string | null {
+  if (attr.image_urls?.length) return attr.image_urls[0];
+  return attr.image_url || null;
+}
+
 const ExplorePage: React.FC = () => {
   const [attractions, setAttractions] = useState<Attraction[]>([]);
   const [loading, setLoading] = useState(true);
   const [cityFilter, setCityFilter] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedAttraction, setSelectedAttraction] = useState<Attraction | null>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -121,20 +149,35 @@ const ExplorePage: React.FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
-                  className="bg-white dark:bg-dark-surface rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-dark-border overflow-hidden flex flex-col group"
+                  onClick={() => { setSelectedAttraction(attr); setActiveImageIndex(0); }}
+                  className="bg-white dark:bg-dark-surface rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-dark-border overflow-hidden flex flex-col group cursor-pointer"
                 >
-                  {/* Image Placeholder (Gradient based on category) */}
-                  <div className={`h-48 relative bg-gradient-to-br 
-                    ${attr.category === 'Beach' ? 'from-blue-400 to-cyan-300' : 
-                      attr.category === 'Heritage' ? 'from-amber-600 to-orange-400' :
-                      attr.category === 'Nature' ? 'from-green-500 to-emerald-400' :
-                      attr.category === 'Adventure' ? 'from-red-500 to-orange-500' :
-                      'from-indigo-500 to-purple-500'}`}
-                  >
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                  {/* Image */}
+                  <div className={`h-48 relative bg-slate-200 dark:bg-slate-800 overflow-hidden`}>
+                    {primaryImage(attr) ? (
+                      <img
+                        src={primaryImage(attr)!}
+                        alt={attr.name}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        onError={(e) => {
+                          const fallbacks = attr.image_urls?.slice(1) ?? [];
+                          const next = fallbacks.find((u) => u !== e.currentTarget.src);
+                          if (next) {
+                            e.currentTarget.src = next;
+                          } else {
+                            e.currentTarget.style.display = 'none';
+                          }
+                        }}
+                      />
+                    ) : (
+                      <motion.div className={`absolute inset-0 bg-gradient-to-br ${PLACEHOLDER_GRADIENT[attr.category] || 'from-indigo-500 to-purple-500'}`} />
+                    )}
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
                     <button 
-                      onClick={() => toggleFavorite(attr.id)}
-                      className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center transition-colors"
+                      onClick={(e) => { e.stopPropagation(); toggleFavorite(attr.id); }}
+                      className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center transition-colors z-10"
                     >
                       <Heart className={`w-5 h-5 ${attr.is_favorite ? 'fill-red-500 text-red-500' : 'text-white'}`} />
                     </button>
@@ -198,6 +241,164 @@ const ExplorePage: React.FC = () => {
             <p>No attractions found matching your criteria.</p>
           </div>
         )}
+
+        {/* Attraction Details Modal */}
+        <AnimatePresence>
+          {selectedAttraction && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                onClick={() => setSelectedAttraction(null)}
+                className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+              />
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className="bg-white dark:bg-dark-surface w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl relative overflow-hidden flex flex-col z-10"
+              >
+                <button 
+                  onClick={() => setSelectedAttraction(null)}
+                  className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <div className="flex flex-col md:flex-row h-full overflow-y-auto md:overflow-hidden">
+                  
+                  {/* Left: Images */}
+                  <div className="w-full md:w-1/2 relative bg-slate-900 min-h-[300px] md:min-h-full shrink-0 group">
+                    {selectedAttraction.image_urls && selectedAttraction.image_urls.length > 0 ? (
+                      <>
+                        <img 
+                          src={selectedAttraction.image_urls[activeImageIndex]} 
+                          alt={selectedAttraction.name}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const fallbacks = selectedAttraction.image_urls.filter((u) => u !== e.currentTarget.src);
+                            if (fallbacks.length) e.currentTarget.src = fallbacks[0];
+                          }}
+                        />
+                        {selectedAttraction.image_urls.length > 1 && (
+                          <>
+                            <button 
+                              onClick={(e) => { e.stopPropagation(); setActiveImageIndex((prev) => (prev === 0 ? selectedAttraction.image_urls.length - 1 : prev - 1)); }}
+                              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/30 hover:bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              <ChevronLeft className="w-6 h-6" />
+                            </button>
+                            <button 
+                              onClick={(e) => { e.stopPropagation(); setActiveImageIndex((prev) => (prev === selectedAttraction.image_urls.length - 1 ? 0 : prev + 1)); }}
+                              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/30 hover:bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              <ChevronRight className="w-6 h-6" />
+                            </button>
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                              {selectedAttraction.image_urls.map((_, i) => (
+                                <div key={i} className={`w-2 h-2 rounded-full transition-all ${i === activeImageIndex ? 'bg-white scale-125' : 'bg-white/50'}`} />
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <div className="w-full h-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+                        <Compass className="w-16 h-16 text-slate-400 opacity-50" />
+                      </div>
+                    )}
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 bg-black/40 backdrop-blur-md rounded-full text-xs font-semibold text-white uppercase tracking-wider">
+                        {selectedAttraction.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right: Info, Costs, Reviews */}
+                  <div className="w-full md:w-1/2 flex flex-col md:overflow-y-auto p-6 lg:p-8">
+                    <div className="mb-6">
+                      <div className="flex justify-between items-start mb-2">
+                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{selectedAttraction.name}</h2>
+                        <button 
+                          onClick={() => toggleFavorite(selectedAttraction.id)}
+                          className={`p-2 rounded-full transition-colors ${selectedAttraction.is_favorite ? 'bg-red-50 text-red-500 dark:bg-red-500/10' : 'bg-slate-100 text-slate-400 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700'}`}
+                        >
+                          <Heart className={`w-5 h-5 ${selectedAttraction.is_favorite ? 'fill-current' : ''}`} />
+                        </button>
+                      </div>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 flex items-center mb-4 font-medium">
+                        <MapPin className="w-4 h-4 mr-1" /> {selectedAttraction.city}
+                      </p>
+                      <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                        {selectedAttraction.description}
+                      </p>
+                    </div>
+
+                    {/* Cost Breakdown */}
+                    <div className="mb-8 bg-slate-50 dark:bg-slate-800/50 rounded-xl p-5 border border-slate-100 dark:border-slate-700">
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4 flex items-center">
+                        <IndianRupee className="w-4 h-4 mr-2 text-primary-500" /> Cost Per Person
+                      </h3>
+                      <div className="flex justify-between items-end mb-4 pb-4 border-b border-slate-200 dark:border-slate-700">
+                        <span className="text-slate-600 dark:text-slate-400 font-medium">Total Estimate</span>
+                        <span className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+                          {selectedAttraction.cost_estimate_inr === 0 ? 'Free' : `₹${selectedAttraction.cost_estimate_inr}`}
+                        </span>
+                      </div>
+                      
+                      {selectedAttraction.cost_breakdown && Object.keys(selectedAttraction.cost_breakdown).length > 0 ? (
+                        <div className="space-y-3">
+                          {Object.entries(selectedAttraction.cost_breakdown).map(([key, value]) => (
+                            <div key={key} className="flex justify-between items-center text-sm">
+                              <span className="text-slate-600 dark:text-slate-400">{key}</span>
+                              <span className="font-semibold text-slate-900 dark:text-slate-200">
+                                {typeof value === 'number' ? `₹${value}` : value}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+
+                    {/* Reviews */}
+                    <div className="flex-grow">
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center">
+                        <Star className="w-5 h-5 mr-2 text-amber-500 fill-amber-500" /> Real-time Reviews
+                      </h3>
+                      
+                      {selectedAttraction.reviews && selectedAttraction.reviews.length > 0 ? (
+                        <div className="space-y-4">
+                          {selectedAttraction.reviews.map((review, i) => (
+                            <div key={i} className="bg-white dark:bg-dark-bg p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
+                              <div className="flex justify-between items-start mb-2">
+                                <div className="flex items-center">
+                                  <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-3">
+                                    <UserIcon className="w-4 h-4" />
+                                  </div>
+                                  <div>
+                                    <p className="text-sm font-semibold text-slate-900 dark:text-white">{review.user}</p>
+                                    <p className="text-xs text-slate-400">{review.date}</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded">
+                                  <span className="text-sm font-bold text-amber-600 dark:text-amber-400 mr-1">{review.rating}</span>
+                                  <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                                </div>
+                              </div>
+                              <p className="text-sm text-slate-600 dark:text-slate-300 italic">"{review.text}"</p>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="text-center py-8 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                          <p className="text-slate-500 dark:text-slate-400 text-sm">No reviews available yet.</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>

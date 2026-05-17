@@ -208,6 +208,7 @@ const ItineraryDetailsPage: React.FC = () => {
                     {slot.slot_type === 'attraction' ? <MapPin className="w-5 h-5" /> : 
                      slot.slot_type === 'breakfast' ? <span className="text-lg">🥐</span> : 
                      slot.slot_type === 'lunch' || slot.slot_type === 'dinner' ? <span className="text-lg">🍽️</span> : 
+                     slot.slot_type === 'stay' ? <span className="text-lg">🛏️</span> : 
                      <Clock className="w-5 h-5" />}
                   </div>
 
@@ -245,42 +246,137 @@ const ItineraryDetailsPage: React.FC = () => {
                       </div>
                       
                       <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2 leading-tight">
-                        {slot.slot_type === 'attraction' ? slot.attraction_name : slot.slot_type.charAt(0).toUpperCase() + slot.slot_type.slice(1)}
+                        {slot.slot_type === 'attraction'
+                          ? slot.attraction_name
+                          : slot.stay_name || slot.restaurant_name || slot.attraction_name || slot.slot_type.charAt(0).toUpperCase() + slot.slot_type.slice(1)}
                       </h4>
+
+                      {(slot.slot_type === 'breakfast' || slot.slot_type === 'lunch' || slot.slot_type === 'dinner' || slot.slot_type === 'stay') && (
+                        <div className="mb-3 flex flex-wrap gap-2">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-2 py-1 rounded-md">
+                            {slot.slot_type}
+                          </span>
+                          {slot.restaurant_area && (
+                            <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center">
+                              <MapPin className="w-3 h-3 mr-1" /> {slot.restaurant_area}
+                            </span>
+                          )}
+                          {slot.cuisine_type && (
+                            <span className="text-xs text-slate-500 dark:text-slate-400">
+                              {slot.cuisine_type}
+                            </span>
+                          )}
+                          {slot.restaurant_vibe && (
+                            <span className="text-xs text-rose-500 dark:text-rose-400 font-medium border border-rose-200 dark:border-rose-800 px-2 py-0.5 rounded flex items-center">
+                              ✨ {slot.restaurant_vibe}
+                            </span>
+                          )}
+                          {slot.restaurant_source && (
+                            <span className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                              Via {slot.restaurant_source}
+                            </span>
+                          )}
+                          {slot.stay_type && (
+                            <span className="text-xs text-indigo-500 dark:text-indigo-400 font-medium border border-indigo-200 dark:border-indigo-800 px-2 py-0.5 rounded">
+                              {slot.stay_type}
+                            </span>
+                          )}
+                          {slot.stay_source && (
+                            <span className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                              Via {slot.stay_source}
+                            </span>
+                          )}
+                        </div>
+                      )}
                       
                       <p className="text-sm text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
                         {slot.description}
                       </p>
 
-                      {slot.slot_type === 'attraction' && slot.recommendation_reason && (
+                      {slot.famous_dishes && slot.famous_dishes.length > 0 && (
+                        <motion.div className="mb-4">
+                          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                            Must-try dishes
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {slot.famous_dishes.map((dish: string, i: number) => (
+                              <span
+                                key={i}
+                                className="text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-800 dark:text-orange-300 px-2.5 py-1 rounded-full border border-orange-100 dark:border-orange-800/40"
+                              >
+                                {dish}
+                              </span>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {slot.recommendation_reason && (
                         <div className="mt-4 p-3 bg-gradient-to-br from-indigo-50 to-primary-50 dark:from-indigo-900/20 dark:to-primary-900/20 rounded-xl border border-indigo-100/50 dark:border-indigo-800/30 flex items-start">
                           <Brain className="w-4 h-4 text-indigo-500 mr-2 shrink-0 mt-0.5" />
                           <p className="text-xs text-indigo-900 dark:text-indigo-300">
-                            <span className="font-semibold block mb-0.5 text-indigo-800 dark:text-indigo-200">Why this matches you:</span>
+                            <span className="font-semibold block mb-0.5 text-indigo-800 dark:text-indigo-200">
+                              {slot.slot_type === 'attraction' ? 'Why this matches you:' : 'Why we picked this spot:'}
+                            </span>
                             {slot.recommendation_reason}
                           </p>
                         </div>
                       )}
                       
-                      {(slot.estimated_cost > 0 || slot.energy_level > 0) && (
-                        <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400">
-                          {slot.estimated_cost > 0 ? (
-                            <div className="flex items-center">
-                              <IndianRupee className="w-3.5 h-3.5 mr-1" />
-                              Est: {slot.estimated_cost}
+                      {slot.slot_type === 'attraction' ? (
+                        <div className="mt-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 border border-slate-100 dark:border-slate-700">
+                          <div className="flex justify-between items-center mb-3">
+                            <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center">
+                              <IndianRupee className="w-3.5 h-3.5 mr-1.5 text-primary-500" /> Cost Per Person
+                            </h3>
+                            {slot.energy_level > 0 && (
+                              <div className="flex items-center text-xs font-medium text-slate-500 dark:text-slate-400">
+                                <Zap className="w-3.5 h-3.5 mr-1 text-amber-500" />
+                                Energy: {slot.energy_level}/5
+                              </div>
+                            )}
+                          </div>
+                          <div className={`flex justify-between items-end ${slot.cost_breakdown && Object.keys(slot.cost_breakdown).length > 0 ? 'mb-3 pb-3 border-b border-slate-200 dark:border-slate-700' : ''}`}>
+                            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">Total Estimate</span>
+                            <span className="text-lg font-bold text-primary-600 dark:text-primary-400">
+                              {slot.estimated_cost === 0 ? 'Free' : `₹${slot.estimated_cost}`}
+                            </span>
+                          </div>
+                          
+                          {slot.cost_breakdown && Object.keys(slot.cost_breakdown).length > 0 ? (
+                            <div className="space-y-2">
+                              {Object.entries(slot.cost_breakdown).map(([key, value]) => (
+                                <div key={key} className="flex justify-between items-center text-xs">
+                                  <span className="text-slate-600 dark:text-slate-400">{key}</span>
+                                  <span className="font-semibold text-slate-900 dark:text-slate-200">
+                                    {typeof value === 'number' ? `₹${value}` : String(value)}
+                                  </span>
+                                </div>
+                              ))}
                             </div>
-                          ) : (
-                            <div className="flex items-center text-emerald-600 dark:text-emerald-400">
-                              Free Entry
-                            </div>
-                          )}
-                          {slot.energy_level > 0 && (
-                            <div className="flex items-center">
-                              <Zap className="w-3.5 h-3.5 mr-1 text-amber-500" />
-                              Energy: {slot.energy_level}/5
-                            </div>
-                          )}
+                          ) : null}
                         </div>
+                      ) : (
+                        (slot.estimated_cost > 0 || slot.energy_level > 0) && (
+                          <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400">
+                            {slot.estimated_cost > 0 ? (
+                              <div className="flex items-center">
+                                <IndianRupee className="w-3.5 h-3.5 mr-1" />
+                                ~{slot.estimated_cost} / person
+                              </div>
+                            ) : (
+                              <div className="flex items-center text-emerald-600 dark:text-emerald-400">
+                                Free
+                              </div>
+                            )}
+                            {slot.energy_level > 0 && (
+                              <div className="flex items-center">
+                                <Zap className="w-3.5 h-3.5 mr-1 text-amber-500" />
+                                Energy: {slot.energy_level}/5
+                              </div>
+                            )}
+                          </div>
+                        )
                       )}
                     </div>
                   </div>

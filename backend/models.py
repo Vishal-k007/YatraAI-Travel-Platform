@@ -91,6 +91,11 @@ class Attraction(Base):
     cost_estimate_inr = Column(Float, nullable=False)         # in INR
     best_visiting_time = Column(String(50), nullable=False)   # Morning, Afternoon, Evening, Night, Any
 
+    # --- Rich Media and Details ---
+    image_urls = Column(JSON, nullable=True)
+    reviews = Column(JSON, nullable=True)
+    cost_breakdown = Column(JSON, nullable=True)
+
     # --- Scoring Dimensions (1-5 scale) ---
     crowd_density = Column(Float, nullable=False)        # 1=empty, 5=very crowded
     physical_intensity = Column(Float, nullable=False)   # 1=easy, 5=very strenuous

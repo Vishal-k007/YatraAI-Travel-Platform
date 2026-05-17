@@ -6,6 +6,12 @@ time-slotted itinerary spanning multiple days. Features realistic budgeting, clu
 import math
 from typing import List, Dict, Any
 
+from ml.restaurant_recommender import restaurant_recommender
+
+
+MIN_ATTRACTIONS_PER_DAY = 2
+
+
 class ItineraryOptimizer:
     def __init__(self):
         # Average speeds in km/h depending on the city terrain
@@ -46,12 +52,70 @@ class ItineraryOptimizer:
         if display_h == 0: display_h = 12
         return f"{display_h:02d}:{m:02d} {period}"
 
+    def _attraction_count(self, day_plan: dict) -> int:
+        return sum(1 for s in day_plan["slots"] if s["slot_type"] == "attraction")
+
+    def _day_attraction_ids(self, day_plan: dict) -> set:
+        return {s["attraction_id"] for s in day_plan["slots"] if s.get("attraction_id")}
+
+    def _build_attraction_slot(
+        self,
+        loc: Dict[str, Any],
+        start_hour: float,
+        order_index: int,
+        period: str,
+        travel_mins: float,
+    ) -> tuple[dict, float]:
+        """Build attraction slot dict and return (slot, end_hour)."""
+        attr = loc["attraction"]
+        duration = attr.get("avg_visit_duration_hours", 2.0)
+        end_hour = start_hour + duration
+        cost = attr.get("cost_estimate_inr", 0) or 0
+        start_label = self._get_time_label(start_hour)
+        end_label = self._get_time_label(end_hour)
+
+        slot = {
+            "slot_type": "attraction",
+            "time_label": f"{start_label} - {end_label}",
+            "period": period,
+            "attraction_id": attr["id"],
+            "attraction_name": attr["name"],
+            "description": attr["description"],
+            "image_url": attr.get("image_url", ""),
+            "image_urls": attr.get("image_urls") or [],
+            "duration_hours": duration,
+            "estimated_cost": cost,
+            "cost_estimate_inr": cost,
+            "cost_breakdown": attr.get("cost_breakdown") or {},
+            "best_visiting_time": attr.get("best_visiting_time"),
+            "energy_level": attr.get("physical_intensity", 2.0),
+            "travel_time_mins": travel_mins,
+            "recommendation_reason": loc["reason"],
+            "order_index": order_index,
+            "latitude": attr["latitude"],
+            "longitude": attr["longitude"],
+            "category": attr["category"],
+        }
+        return slot, end_hour
+
+    def _refresh_available_for_day(
+        self,
+        available: List[Dict[str, Any]],
+        valid_attractions: List[Dict[str, Any]],
+        day_plan: dict,
+    ) -> List[Dict[str, Any]]:
+        used_ids = self._day_attraction_ids(day_plan)
+        refreshed = [a for a in valid_attractions if a["attraction"]["id"] not in used_ids]
+        return refreshed if refreshed else valid_attractions.copy()
+
     def generate_itinerary(self, 
                            city: str, 
                            num_days: int, 
                            user_profile: dict, 
                            scored_attractions: List[Dict[str, Any]],
-                           budget_limit: float = None) -> dict:
+                           budget_limit: float = None,
+                           stay_budget: float = 1000.0,
+                           food_budget: float = 1000.0) -> dict:
         """
         Constructs a complete itinerary with dynamic pacing, realistic budget, and clustering.
         """
@@ -76,7 +140,7 @@ class ItineraryOptimizer:
         
         # Ensure budget fits user style (1-5)
         user_budget_pref = user_profile.get('budget_per_day', 3)
-        daily_food_budget = 1000 if user_budget_pref < 3 else (2500 if user_budget_pref == 3 else 5000)
+        daily_food_budget = food_budget if food_budget is not None else 1000.0
         local_transport_budget = 500 if user_budget_pref < 3 else (1200 if user_budget_pref == 3 else 3000)
         
         if budget_limit:
@@ -90,6 +154,7 @@ class ItineraryOptimizer:
         
         available = valid_attractions.copy()
         days_data = []
+        used_restaurants: set[str] = set()
         
         total_estimated_cost = 0.0
         
@@ -139,49 +204,54 @@ class ItineraryOptimizer:
             else:
                 current_loc = available.pop(best_seed_idx)
             
-            # Breakfast
+            # Breakfast — famous restaurant near today's first stop
+            bf_lat = current_loc['attraction']['latitude']
+            bf_lon = current_loc['attraction']['longitude']
+            breakfast = restaurant_recommender.recommend(
+                city, "breakfast", bf_lat, bf_lon, used_restaurants, daily_food_budget,
+            )
+            if breakfast:
+                used_restaurants.add(breakfast["restaurant_name"])
+                breakfast_cost = breakfast["estimated_cost"]
+            else:
+                breakfast_cost = int(daily_food_budget * 0.2)
+                breakfast = {
+                    "attraction_name": "Local Breakfast Spot",
+                    "description": "Start your day with a hearty local breakfast.",
+                    "estimated_cost": breakfast_cost,
+                }
             day_plan['slots'].append({
                 "slot_type": "breakfast",
                 "time_label": f"{self._get_time_label(current_time - 1.0)} - {self._get_time_label(current_time - 0.25)}",
                 "period": "morning",
-                "description": "Start your day with a hearty local breakfast.",
+                "description": breakfast["description"],
+                "attraction_name": breakfast.get("attraction_name"),
+                "restaurant_name": breakfast.get("restaurant_name"),
+                "restaurant_area": breakfast.get("restaurant_area"),
+                "cuisine_type": breakfast.get("cuisine_type"),
+                "famous_dishes": breakfast.get("famous_dishes"),
                 "duration_hours": 0.75,
-                "estimated_cost": int(daily_food_budget * 0.2),
+                "estimated_cost": breakfast_cost,
                 "energy_level": 0.2,
-                "travel_time_mins": 0,
-                "order_index": 0
+                "travel_time_mins": 10,
+                "recommendation_reason": breakfast.get("recommendation_reason"),
+                "restaurant_vibe": breakfast.get("restaurant_vibe"),
+                "restaurant_source": breakfast.get("restaurant_source"),
+                "latitude": breakfast.get("latitude"),
+                "longitude": breakfast.get("longitude"),
+                "order_index": 0,
             })
+            day_plan['total_cost'] += breakfast_cost - int(daily_food_budget * 0.2)
+            total_estimated_cost += breakfast_cost - int(daily_food_budget * 0.2)
             
             # Add Morning Attraction
-            start_label = self._get_time_label(current_time)
-            duration = current_loc['attraction'].get('avg_visit_duration_hours', 2.0)
-            current_time += duration
-            end_label = self._get_time_label(current_time)
-            cost = current_loc['attraction'].get('cost_estimate_inr', 0)
-            energy = current_loc['attraction'].get('physical_intensity', 2.0)
-            
-            slot = {
-                "slot_type": "attraction",
-                "time_label": f"{start_label} - {end_label}",
-                "period": "morning",
-                "attraction_id": current_loc['attraction']['id'],
-                "attraction_name": current_loc['attraction']['name'],
-                "description": current_loc['attraction']['description'],
-                "image_url": current_loc['attraction'].get('image_url', ''),
-                "duration_hours": duration,
-                "estimated_cost": cost,
-                "energy_level": energy,
-                "travel_time_mins": 15, # Commute from hotel
-                "recommendation_reason": current_loc['reason'],
-                "order_index": 1,
-                "latitude": current_loc['attraction']['latitude'],
-                "longitude": current_loc['attraction']['longitude'],
-                "category": current_loc['attraction']['category']
-            }
+            slot, current_time = self._build_attraction_slot(
+                current_loc, current_time, 1, "morning", 15
+            )
             day_plan['slots'].append(slot)
-            day_plan['total_energy'] += energy
-            day_plan['total_cost'] += cost
-            total_estimated_cost += cost
+            day_plan['total_energy'] += slot['energy_level']
+            day_plan['total_cost'] += slot['estimated_cost']
+            total_estimated_cost += slot['estimated_cost']
             
             last_lat = current_loc['attraction']['latitude']
             last_lon = current_loc['attraction']['longitude']
@@ -193,119 +263,232 @@ class ItineraryOptimizer:
             elif lunch_start > 14.5: lunch_start = 14.5
             current_time = lunch_start + 1.5
             
+            lunch = restaurant_recommender.recommend(
+                city, "lunch", last_lat, last_lon, used_restaurants, daily_food_budget,
+            )
+            if lunch:
+                used_restaurants.add(lunch["restaurant_name"])
+                lunch_cost = lunch["estimated_cost"]
+            else:
+                lunch_cost = int(daily_food_budget * 0.4)
+                lunch = {
+                    "attraction_name": "Local Lunch Spot",
+                    "description": "Lunch break at a highly-rated local restaurant nearby.",
+                    "estimated_cost": lunch_cost,
+                }
             day_plan['slots'].append({
                 "slot_type": "lunch",
                 "time_label": f"{self._get_time_label(lunch_start)} - {self._get_time_label(current_time)}",
                 "period": "afternoon",
-                "description": "Lunch break. We recommend trying a highly-rated local restaurant nearby.",
+                "description": lunch["description"],
+                "attraction_name": lunch.get("attraction_name"),
+                "restaurant_name": lunch.get("restaurant_name"),
+                "restaurant_area": lunch.get("restaurant_area"),
+                "cuisine_type": lunch.get("cuisine_type"),
+                "famous_dishes": lunch.get("famous_dishes"),
                 "duration_hours": 1.5,
-                "estimated_cost": int(daily_food_budget * 0.4),
+                "estimated_cost": lunch_cost,
                 "energy_level": 0.5,
                 "travel_time_mins": 15,
-                "order_index": 2
+                "recommendation_reason": lunch.get("recommendation_reason"),
+                "restaurant_vibe": lunch.get("restaurant_vibe"),
+                "restaurant_source": lunch.get("restaurant_source"),
+                "latitude": lunch.get("latitude"),
+                "longitude": lunch.get("longitude"),
+                "order_index": 2,
             })
+            day_plan['total_cost'] += lunch_cost - int(daily_food_budget * 0.4)
+            total_estimated_cost += lunch_cost - int(daily_food_budget * 0.4)
             
-            # Fill remaining day (until ~6 PM for attractions)
+            # Fill afternoon/evening — at least MIN_ATTRACTIONS_PER_DAY tourist spots per day
             slot_index = 3
-            
-            while current_time < 18.0 and day_plan['total_energy'] < max_daily_energy:
+
+            while True:
+                attr_count = self._attraction_count(day_plan)
+                need_more_spots = attr_count < MIN_ATTRACTIONS_PER_DAY
+                if not need_more_spots and (
+                    current_time >= 18.0 or day_plan["total_energy"] >= max_daily_energy
+                ):
+                    break
+
                 if not available:
-                    available = valid_attractions.copy()
-                    
-                # Find best next attraction: cluster geographically + score
-                best_next_idx = -1
-                best_heuristic = -float('inf')
-                
-                for i, cand in enumerate(available):
-                    cost_cand = cand['attraction'].get('cost_estimate_inr', 0)
-                    if budget_limit and total_estimated_cost + cost_cand > budget_limit:
-                        continue
-                        
-                    dist = self.haversine_distance(
-                        last_lat, last_lon, 
-                        cand['attraction']['latitude'], cand['attraction']['longitude']
+                    available = self._refresh_available_for_day(
+                        available, valid_attractions, day_plan
                     )
-                    
-                    # Heuristic: Score highly, penalize distance heavily to create clusters
+
+                best_next_idx = -1
+                best_heuristic = -float("inf")
+
+                for i, cand in enumerate(available):
+                    cost_cand = cand["attraction"].get("cost_estimate_inr", 0)
+                    if budget_limit and total_estimated_cost + cost_cand > budget_limit:
+                        if not need_more_spots:
+                            continue
+
+                    dist = self.haversine_distance(
+                        last_lat,
+                        last_lon,
+                        cand["attraction"]["latitude"],
+                        cand["attraction"]["longitude"],
+                    )
                     dist_penalty = (dist / 2.0) if dist > 0 else 0
-                    time_bonus = 0.5 if cand['attraction']['best_visiting_time'] in ['Afternoon', 'Evening', 'Any'] else 0
-                    heuristic = cand['score'] + time_bonus - dist_penalty
-                    
+                    time_bonus = (
+                        0.5
+                        if cand["attraction"]["best_visiting_time"]
+                        in ["Afternoon", "Evening", "Any"]
+                        else 0
+                    )
+                    heuristic = cand["score"] + time_bonus - dist_penalty
+
                     if heuristic > best_heuristic:
                         best_heuristic = heuristic
                         best_next_idx = i
-                
+
                 if best_next_idx == -1:
-                    # Try relaxing budget slightly or stop adding attractions for the day
-                    break
-                    
+                    if need_more_spots:
+                        available = self._refresh_available_for_day(
+                            available, valid_attractions, day_plan
+                        )
+                        if not available:
+                            break
+                        best_next_idx = max(
+                            range(len(available)),
+                            key=lambda i: available[i]["score"],
+                        )
+                    else:
+                        break
+
                 next_loc = available.pop(best_next_idx)
-                
+
                 dist_km = self.haversine_distance(
-                    last_lat, last_lon, 
-                    next_loc['attraction']['latitude'], next_loc['attraction']['longitude']
+                    last_lat,
+                    last_lon,
+                    next_loc["attraction"]["latitude"],
+                    next_loc["attraction"]["longitude"],
                 )
                 travel_mins = self._estimate_travel_time(dist_km, city)
-                
-                # Check if it fits the day
-                if current_time + (travel_mins / 60.0) + next_loc['attraction'].get('avg_visit_duration_hours', 2.0) > 20.0:
-                    available.append(next_loc) # Put it back
-                    break
-                
-                current_time += (travel_mins / 60.0)
-                
-                start_label = self._get_time_label(current_time)
-                duration = next_loc['attraction'].get('avg_visit_duration_hours', 2.0)
-                current_time += duration
-                end_label = self._get_time_label(current_time)
-                
-                cost = next_loc['attraction'].get('cost_estimate_inr', 0)
-                energy = next_loc['attraction'].get('physical_intensity', 2.0)
+                duration = next_loc["attraction"].get("avg_visit_duration_hours", 2.0)
+                if need_more_spots and attr_count == 1:
+                    duration = min(duration, 2.0)
+
+                max_end_hour = 20.5 if need_more_spots else 20.0
+                if current_time + (travel_mins / 60.0) + duration > max_end_hour:
+                    available.append(next_loc)
+                    if need_more_spots and attr_count >= 1:
+                        duration = min(
+                            next_loc["attraction"].get("avg_visit_duration_hours", 2.0),
+                            max(1.0, max_end_hour - current_time - travel_mins / 60.0),
+                        )
+                        if duration < 0.75:
+                            break
+                    else:
+                        break
+
+                current_time += travel_mins / 60.0
                 period = "afternoon" if current_time < 17.0 else "evening"
-                
-                slot = {
-                    "slot_type": "attraction",
-                    "time_label": f"{start_label} - {end_label}",
-                    "period": period,
-                    "attraction_id": next_loc['attraction']['id'],
-                    "attraction_name": next_loc['attraction']['name'],
-                    "description": next_loc['attraction']['description'],
-                    "image_url": next_loc['attraction'].get('image_url', ''),
-                    "duration_hours": duration,
-                    "estimated_cost": cost,
-                    "energy_level": energy,
-                    "travel_time_mins": travel_mins,
-                    "recommendation_reason": next_loc['reason'],
-                    "order_index": slot_index,
-                    "latitude": next_loc['attraction']['latitude'],
-                    "longitude": next_loc['attraction']['longitude'],
-                    "category": next_loc['attraction']['category']
-                }
-                day_plan['slots'].append(slot)
-                day_plan['total_energy'] += energy
-                day_plan['total_cost'] += cost
-                day_plan['total_travel_time_mins'] += travel_mins
-                total_estimated_cost += cost
-                
-                last_lat = next_loc['attraction']['latitude']
-                last_lon = next_loc['attraction']['longitude']
+                slot, current_time = self._build_attraction_slot(
+                    next_loc, current_time, slot_index, period, travel_mins
+                )
+                if need_more_spots and attr_count == 1:
+                    slot["duration_hours"] = duration
+                    end_hour = current_time - duration + duration
+                    slot["time_label"] = (
+                        f"{self._get_time_label(current_time - duration)} - "
+                        f"{self._get_time_label(current_time)}"
+                    )
+
+                day_plan["slots"].append(slot)
+                day_plan["total_energy"] += slot["energy_level"]
+                day_plan["total_cost"] += slot["estimated_cost"]
+                day_plan["total_travel_time_mins"] += travel_mins
+                total_estimated_cost += slot["estimated_cost"]
+
+                last_lat = next_loc["attraction"]["latitude"]
+                last_lon = next_loc["attraction"]["longitude"]
                 slot_index += 1
                 
             # Dinner
             current_time += 0.5
             dinner_start = current_time if current_time > 19.0 else 19.0
             
+            dinner = restaurant_recommender.recommend(
+                city, "dinner", last_lat, last_lon, used_restaurants, daily_food_budget,
+            )
+            if dinner:
+                used_restaurants.add(dinner["restaurant_name"])
+                dinner_cost = dinner["estimated_cost"]
+            else:
+                dinner_cost = int(daily_food_budget * 0.4)
+                dinner = {
+                    "attraction_name": "Local Dinner Spot",
+                    "description": "Relax and enjoy a delicious dinner to end your day.",
+                    "estimated_cost": dinner_cost,
+                }
             day_plan['slots'].append({
                 "slot_type": "dinner",
                 "time_label": f"{self._get_time_label(dinner_start)} - {self._get_time_label(dinner_start + 1.5)}",
                 "period": "night",
-                "description": "Relax and enjoy a delicious dinner to end your day.",
+                "description": dinner["description"],
+                "attraction_name": dinner.get("attraction_name"),
+                "restaurant_name": dinner.get("restaurant_name"),
+                "restaurant_area": dinner.get("restaurant_area"),
+                "cuisine_type": dinner.get("cuisine_type"),
+                "famous_dishes": dinner.get("famous_dishes"),
                 "duration_hours": 1.5,
-                "estimated_cost": int(daily_food_budget * 0.4),
+                "estimated_cost": dinner_cost,
                 "energy_level": 0.5,
                 "travel_time_mins": 20,
-                "order_index": slot_index
+                "recommendation_reason": dinner.get("recommendation_reason"),
+                "restaurant_vibe": dinner.get("restaurant_vibe"),
+                "restaurant_source": dinner.get("restaurant_source"),
+                "latitude": dinner.get("latitude"),
+                "longitude": dinner.get("longitude"),
+                "order_index": slot_index,
             })
+            day_plan['total_cost'] += dinner_cost - int(daily_food_budget * 0.4)
+            total_estimated_cost += dinner_cost - int(daily_food_budget * 0.4)
+            
+            # Stay / Accommodation
+            stay_options = {
+                "Goa": [
+                    {"name": "Zostel Goa", "type": "Hostel", "source": "Booking.com", "cost": 600, "desc": "Lively hostel near the beach with great vibes."},
+                    {"name": "Seaside Budget Homestay", "type": "Homestay", "source": "Airbnb", "cost": 1200, "desc": "Cozy homestay with local Goan breakfast included."},
+                    {"name": "Panjim Heritage Inn", "type": "Hotel", "source": "Google Hotels", "cost": 1800, "desc": "Classic Portuguese style inn in the heart of Panjim."},
+                ],
+                "Jaipur": [
+                    {"name": "Moustache Hostel Jaipur", "type": "Hostel", "source": "Booking.com", "cost": 500, "desc": "Rooftop views of Nahargarh Fort, great for solo travelers."},
+                    {"name": "Pink City Heritage Guest House", "type": "Guesthouse", "source": "Airbnb", "cost": 1100, "desc": "Authentic Rajasthani decor and warm hospitality."},
+                    {"name": "Boutique Palace Stay", "type": "Hotel", "source": "Google Hotels", "cost": 1900, "desc": "Experience royal living on a budget with a courtyard pool."},
+                ],
+                "Manali": [
+                    {"name": "Alt Life - Manali", "type": "Hostel", "source": "Booking.com", "cost": 700, "desc": "Mountain views and cafe in Old Manali."},
+                    {"name": "Apple Orchard Homestay", "type": "Homestay", "source": "Airbnb", "cost": 1400, "desc": "Wake up to snow-capped peaks and fresh apples."},
+                    {"name": "River View Retreat", "type": "Resort", "source": "Google Hotels", "cost": 2000, "desc": "Comfortable stay right next to the Beas river."},
+                ]
+            }
+            city_stays = stay_options.get(city, stay_options["Goa"])
+            budget_to_use = stay_budget if stay_budget is not None else 1000.0
+            valid_stays = [s for s in city_stays if s["cost"] <= budget_to_use]
+            stay = max(valid_stays, key=lambda x: x["cost"]) if valid_stays else min(city_stays, key=lambda x: x["cost"])
+            
+            day_plan['slots'].append({
+                "slot_type": "stay",
+                "time_label": "Overnight",
+                "period": "night",
+                "description": f"{stay['desc']} (Data sourced from {stay['source']})",
+                "attraction_name": stay["name"],
+                "stay_name": stay["name"],
+                "stay_type": stay["type"],
+                "stay_source": stay["source"],
+                "estimated_cost": stay["cost"],
+                "duration_hours": 0.0,
+                "energy_level": 0.0,
+                "travel_time_mins": 0.0,
+                "order_index": slot_index + 1,
+            })
+            day_plan['total_cost'] += stay["cost"]
+            total_estimated_cost += stay["cost"]
+            
             
             # Theme based on categories
             cats = [s.get('category') for s in day_plan['slots'] if s.get('category') and s['slot_type'] == 'attraction']

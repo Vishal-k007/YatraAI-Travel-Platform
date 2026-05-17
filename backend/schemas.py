@@ -133,6 +133,9 @@ class AttractionResponse(BaseModel):
     category: str
     description: str
     image_url: Optional[str] = None
+    image_urls: Optional[List[str]] = None
+    reviews: Optional[List[Dict[str, Any]]] = None
+    cost_breakdown: Optional[Dict[str, Any]] = None
     latitude: float
     longitude: float
     avg_visit_duration_hours: float
@@ -175,6 +178,8 @@ class ItineraryRequest(BaseModel):
     city: str = Field(..., description="Target city: Goa, Jaipur, or Manali")
     num_days: int = Field(..., ge=1, le=7, description="Number of days (1-7)")
     budget_total: Optional[float] = Field(None, description="Total budget in INR")
+    stay_budget_per_night: Optional[float] = Field(None, description="Stay budget per night in INR")
+    food_budget_per_day: Optional[float] = Field(None, description="Food budget per day in INR")
     preferences: Optional[Dict[str, Any]] = Field(None, description="Additional preferences")
 
 
@@ -196,6 +201,15 @@ class SlotResponse(BaseModel):
     longitude: Optional[float] = None
     image_url: Optional[str] = None
     category: Optional[str] = None
+    restaurant_name: Optional[str] = None
+    restaurant_area: Optional[str] = None
+    cuisine_type: Optional[str] = None
+    famous_dishes: Optional[List[str]] = None
+    restaurant_vibe: Optional[str] = None
+    restaurant_source: Optional[str] = None
+    stay_name: Optional[str] = None
+    stay_type: Optional[str] = None
+    stay_source: Optional[str] = None
 
 
 class DayResponse(BaseModel):

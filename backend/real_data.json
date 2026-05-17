@@ -1,0 +1,1518 @@
+[
+  {
+    "id": 1,
+    "name": "Baga Beach",
+    "city": "Goa",
+    "category": "Beach",
+    "description": "One of the most famous beaches in Goa, known for its vibrant nightlife, water sports, and beach shacks.",
+    "image_url": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.5553,
+    "longitude": 73.7517,
+    "avg_visit_duration_hours": 4.0,
+    "cost_estimate_inr": 1200,
+    "best_visiting_time": "Evening",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Rahul Desai",
+        "rating": 4.5,
+        "text": "Very crowded but happening. Tito's lane is right there. Great water sports options.",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Emily Smith",
+        "rating": 4.0,
+        "text": "Great for sunset. Too many hawkers though, but the shacks serve amazing seafood.",
+        "date": "3 weeks ago"
+      },
+      {
+        "user": "Amit Sharma",
+        "rating": 5.0,
+        "text": "Amazing nightlife! The energy here is unmatched in North Goa.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Water Sports": 1000,
+      "Transport": 200
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 2.0,
+    "photography_score": 4.0,
+    "food_availability": 5.0,
+    "family_friendliness": 3.0,
+    "adventure_level": 4.0,
+    "cultural_depth": 1.0,
+    "nightlife_score": 5.0,
+    "weather_sensitivity": 5.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "High-Energy Social Explorer",
+      "Adventure-Focused Wanderer"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Basilica of Bom Jesus",
+    "city": "Goa",
+    "category": "Heritage",
+    "description": "UNESCO World Heritage site containing the mortal remains of St. Francis Xavier.",
+    "image_url": "https://images.unsplash.com/photo-1570051877901-b547849e7943?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.5009,
+    "longitude": 73.9116,
+    "avg_visit_duration_hours": 1.5,
+    "cost_estimate_inr": 200,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1570051877901-b547849e7943?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1588661642878-5a4ce8c886a1?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1596482163351-4e7cb80dc186?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Priya Singh",
+        "rating": 5.0,
+        "text": "Stunning Portuguese architecture. Very peaceful and historic. A UNESCO world heritage site.",
+        "date": "2 days ago"
+      },
+      {
+        "user": "David Brown",
+        "rating": 4.5,
+        "text": "A must-visit for history lovers. The mortal remains of St. Francis Xavier are kept beautifully.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Donation/Audio Guide": 50,
+      "Transport": 150
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 1.0,
+    "photography_score": 5.0,
+    "food_availability": 2.0,
+    "family_friendliness": 4.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 2.0,
+    "is_indoor": 1,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Comfort-Oriented Relaxer"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Dudhsagar Waterfalls",
+    "city": "Goa",
+    "category": "Nature",
+    "description": "Majestic four-tiered waterfall on the Mandovi River, best visited after monsoon.",
+    "image_url": "https://images.unsplash.com/photo-1593006283731-de8a20235b2e?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.3144,
+    "longitude": 74.3143,
+    "avg_visit_duration_hours": 5.0,
+    "cost_estimate_inr": 1100,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1593006283731-de8a20235b2e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1621235334752-959c95111b7f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1627896157734-4bcbfdfcc022?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Karan V.",
+        "rating": 5.0,
+        "text": "The jeep ride through the jungle is an adventure itself! Breathtaking view of the milk-like water.",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Sneha",
+        "rating": 4.0,
+        "text": "Beautiful waterfall, but extremely crowded on weekends. Book the jeep safari early.",
+        "date": "3 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Jeep Safari": 700,
+      "Entry Fee": 100,
+      "Life Jacket": 100,
+      "Transport": 200
+    },
+    "crowd_density": 3.0,
+    "physical_intensity": 4.0,
+    "photography_score": 5.0,
+    "food_availability": 1.0,
+    "family_friendliness": 2.0,
+    "adventure_level": 5.0,
+    "cultural_depth": 1.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 5.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Adventure-Focused Wanderer",
+      "Budget Nature Seeker"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Fort Aguada",
+    "city": "Goa",
+    "category": "Heritage",
+    "description": "17th-century Portuguese fort standing on Sinquerim Beach overlooking the Arabian Sea.",
+    "image_url": "https://images.unsplash.com/photo-1614088515549-011244e883f8?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.4988,
+    "longitude": 73.7686,
+    "avg_visit_duration_hours": 2.0,
+    "cost_estimate_inr": 300,
+    "best_visiting_time": "Afternoon",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1614088515549-011244e883f8?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1614088484179-847d967e88de?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1614088516086-590fb05c879e?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Rohan M.",
+        "rating": 4.0,
+        "text": "Great panoramic views of the Arabian Sea. The lighthouse is iconic.",
+        "date": "1 month ago"
+      },
+      {
+        "user": "Neha",
+        "rating": 3.5,
+        "text": "Good place for photos, but gets very hot during the day. Go in the evening.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 50,
+      "Transport": 250
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 3.0,
+    "photography_score": 5.0,
+    "food_availability": 2.0,
+    "family_friendliness": 4.0,
+    "adventure_level": 2.0,
+    "cultural_depth": 4.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 4.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "High-Energy Social Explorer"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Anjuna Flea Market",
+    "city": "Goa",
+    "category": "Shopping",
+    "description": "Iconic Wednesday market offering clothes, jewelry, souvenirs, and live music.",
+    "image_url": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.5804,
+    "longitude": 73.7444,
+    "avg_visit_duration_hours": 3.0,
+    "cost_estimate_inr": 200,
+    "best_visiting_time": "Evening",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1555529771-835f59bfc50c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Vikram",
+        "rating": 4.5,
+        "text": "Bargaining is a must! You can find unique bohemian stuff here. Held only on Wednesdays.",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Alia",
+        "rating": 4.0,
+        "text": "Vibrant and colorful. Live music adds to the great vibe. Don't forget to negotiate hard.",
+        "date": "3 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Transport": 200
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 3.0,
+    "photography_score": 4.0,
+    "food_availability": 4.0,
+    "family_friendliness": 3.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 3.0,
+    "nightlife_score": 3.0,
+    "weather_sensitivity": 4.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "High-Energy Social Explorer",
+      "Cultural Depth Traveler"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Club Cubana",
+    "city": "Goa",
+    "category": "Nightlife",
+    "description": "Neon-lit nightclub set on a hill with a pool and multi-level dance floors.",
+    "image_url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.58,
+    "longitude": 73.7663,
+    "avg_visit_duration_hours": 4.0,
+    "cost_estimate_inr": 2500,
+    "best_visiting_time": "Night",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1572116469696-ed1f13b632fa?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Kriti",
+        "rating": 5.0,
+        "text": "The Nightclub in the sky! Unlimited drinks with the cover charge. Amazing crowd.",
+        "date": "5 days ago"
+      },
+      {
+        "user": "Sam",
+        "rating": 4.5,
+        "text": "Great music across multiple levels. The pool area is the best place to chill between dancing.",
+        "date": "2 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Cover Charge (Couples)": 2000,
+      "Transport": 500
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 4.0,
+    "photography_score": 3.0,
+    "food_availability": 4.0,
+    "family_friendliness": 1.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 1.0,
+    "nightlife_score": 5.0,
+    "weather_sensitivity": 2.0,
+    "is_indoor": 1,
+    "recommended_archetypes": [
+      "High-Energy Social Explorer"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Palolem Beach",
+    "city": "Goa",
+    "category": "Beach",
+    "description": "Crescent-shaped beach in South Goa known for calm waters and silent discos.",
+    "image_url": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.01,
+    "longitude": 74.0232,
+    "avg_visit_duration_hours": 5.0,
+    "cost_estimate_inr": 700,
+    "best_visiting_time": "Any",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1540202404-b711884c7bd4?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Jenny",
+        "rating": 5.0,
+        "text": "Much cleaner and quieter than North Goa beaches. The crescent shape is beautiful.",
+        "date": "1 month ago"
+      },
+      {
+        "user": "Arjun",
+        "rating": 4.5,
+        "text": "Silent noise party on Saturday is a unique experience. Dolphin boat rides are worth it.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Boat Ride (Dolphin)": 500,
+      "Transport": 200
+    },
+    "crowd_density": 3.0,
+    "physical_intensity": 1.0,
+    "photography_score": 5.0,
+    "food_availability": 4.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 2.0,
+    "cultural_depth": 2.0,
+    "nightlife_score": 4.0,
+    "weather_sensitivity": 5.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Comfort-Oriented Relaxer",
+      "Budget Nature Seeker"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Spice Plantation",
+    "city": "Goa",
+    "category": "Nature",
+    "description": "Guided tours through lush plantations learning about Indian spices, with traditional lunch.",
+    "image_url": "https://images.unsplash.com/photo-1627896157734-4bcbfdfcc022?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.3995,
+    "longitude": 74.0205,
+    "avg_visit_duration_hours": 3.0,
+    "cost_estimate_inr": 500,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1627896157734-4bcbfdfcc022?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1596649811736-22a0005a81e3?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Meena K.",
+        "rating": 4.5,
+        "text": "Very informative tour about Indian spices. The traditional Goan lunch served on banana leaves was delicious.",
+        "date": "3 weeks ago"
+      },
+      {
+        "user": "Saurabh",
+        "rating": 4.0,
+        "text": "A nice break from the beaches. The welcome drink and elephant ride were fun.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Tour": 300,
+      "Transport": 200
+    },
+    "crowd_density": 2.0,
+    "physical_intensity": 2.0,
+    "photography_score": 4.0,
+    "food_availability": 5.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 4.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 3.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Budget Nature Seeker"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Chapora Fort",
+    "city": "Goa",
+    "category": "Heritage",
+    "description": "Ruined fort made famous by Bollywood movies, offering spectacular sunset views over Vagator beach.",
+    "image_url": "https://images.unsplash.com/photo-1614088515549-011244e883f8?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.606,
+    "longitude": 73.736,
+    "avg_visit_duration_hours": 1.5,
+    "cost_estimate_inr": 150,
+    "best_visiting_time": "Evening",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1614088515549-011244e883f8?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1621235334752-959c95111b7f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1588661642878-5a4ce8c886a1?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Aditi",
+        "rating": 4.5,
+        "text": "Dil Chahta Hai vibes! Best place to watch the sunset overlooking Vagator beach.",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "Rishi",
+        "rating": 4.0,
+        "text": "It's mostly ruins now, but the view is spectacular. Short trek to reach the top.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Transport": 150
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 3.0,
+    "photography_score": 5.0,
+    "food_availability": 1.0,
+    "family_friendliness": 3.0,
+    "adventure_level": 2.0,
+    "cultural_depth": 3.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 4.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Budget Nature Seeker",
+      "High-Energy Social Explorer"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Mangueshi Temple",
+    "city": "Goa",
+    "category": "Heritage",
+    "description": "Prominent Hindu temple dedicated to Lord Shiva, known for its distinct Goan architecture.",
+    "image_url": "https://images.unsplash.com/photo-1596482163351-4e7cb80dc186?auto=format&fit=crop&w=800&q=80",
+    "latitude": 15.4385,
+    "longitude": 73.9678,
+    "avg_visit_duration_hours": 1.0,
+    "cost_estimate_inr": 200,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1596482163351-4e7cb80dc186?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1570051877901-b547849e7943?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1588661642878-5a4ce8c886a1?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Kavita",
+        "rating": 5.0,
+        "text": "Beautiful architecture and very peaceful environment. Dress modestly.",
+        "date": "1 month ago"
+      },
+      {
+        "user": "Anil",
+        "rating": 4.5,
+        "text": "Well maintained and very serene. The deepastambha (lamp tower) is very unique.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Flowers/Offerings": 50,
+      "Transport": 150
+    },
+    "crowd_density": 3.0,
+    "physical_intensity": 1.0,
+    "photography_score": 4.0,
+    "food_availability": 1.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 2.0,
+    "is_indoor": 1,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Comfort-Oriented Relaxer"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Amber Fort",
+    "city": "Jaipur",
+    "category": "Heritage",
+    "description": "Majestic hilltop fort known for its artistic Hindu style elements, massive ramparts, and cobbled paths.",
+    "image_url": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9855,
+    "longitude": 75.8513,
+    "avg_visit_duration_hours": 3.0,
+    "cost_estimate_inr": 700,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Aakash",
+        "rating": 5.0,
+        "text": "Stunning architecture! Wear comfortable shoes because there is a lot of walking.",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Sarah",
+        "rating": 4.5,
+        "text": "The Sheesh Mahal (Mirror Palace) inside is absolutely breathtaking. Hiring a guide is recommended.",
+        "date": "3 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee (Indian)": 100,
+      "Entry (Foreigner)": 500,
+      "Guide": 300,
+      "Transport": 300
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 4.0,
+    "photography_score": 5.0,
+    "food_availability": 3.0,
+    "family_friendliness": 4.0,
+    "adventure_level": 2.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 4.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "High-Energy Social Explorer"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Hawa Mahal",
+    "city": "Jaipur",
+    "category": "Heritage",
+    "description": "The 'Palace of Winds', a five-story building with 953 small windows decorated with intricate latticework.",
+    "image_url": "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9239,
+    "longitude": 75.8267,
+    "avg_visit_duration_hours": 1.0,
+    "cost_estimate_inr": 100,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1582510003544-4d00b7f7415e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1629813580521-1f6b86ab32ea?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Riya",
+        "rating": 4.0,
+        "text": "Best viewed from the cafes opposite the street. Inside is okay, but the facade is the main attraction.",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "John",
+        "rating": 4.5,
+        "text": "Beautiful pink sandstone structure. Great for Instagram photos.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 50,
+      "Transport": 50
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 2.0,
+    "photography_score": 5.0,
+    "food_availability": 4.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 2.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Comfort-Oriented Relaxer"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "City Palace",
+    "city": "Jaipur",
+    "category": "Heritage",
+    "description": "A complex of courtyards, gardens and buildings right in the center of the Old City.",
+    "image_url": "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9255,
+    "longitude": 75.8236,
+    "avg_visit_duration_hours": 2.5,
+    "cost_estimate_inr": 500,
+    "best_visiting_time": "Afternoon",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1614088515549-011244e883f8?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1582510003544-4d00b7f7415e?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Meera",
+        "rating": 4.5,
+        "text": "A beautiful blend of Rajput and Mughal architecture. The four gates are stunning.",
+        "date": "3 weeks ago"
+      },
+      {
+        "user": "Tom",
+        "rating": 4.0,
+        "text": "Very well maintained. The armory and textile museums are highly informative.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 300,
+      "Museum Audio Guide": 200
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 2.0,
+    "photography_score": 5.0,
+    "food_availability": 3.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 2.0,
+    "is_indoor": 1,
+    "recommended_archetypes": [
+      "Comfort-Oriented Relaxer",
+      "Cultural Depth Traveler"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Jantar Mantar",
+    "city": "Jaipur",
+    "category": "Heritage",
+    "description": "Astronomical observation site built in the 18th century, featuring the world's largest stone sundial.",
+    "image_url": "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9248,
+    "longitude": 75.8246,
+    "avg_visit_duration_hours": 1.5,
+    "cost_estimate_inr": 400,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1629813580521-1f6b86ab32ea?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Vivek",
+        "rating": 5.0,
+        "text": "Fascinating astronomical instruments. You definitely need a guide to explain how they work.",
+        "date": "1 month ago"
+      },
+      {
+        "user": "Elena",
+        "rating": 4.0,
+        "text": "The world's largest stone sundial is mind-boggling.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 50,
+      "Guide (Required for understanding)": 200,
+      "Transport": 150
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 2.0,
+    "photography_score": 4.0,
+    "food_availability": 2.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 5.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Comfort-Oriented Relaxer"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Johari Bazaar",
+    "city": "Jaipur",
+    "category": "Shopping",
+    "description": "Vibrant market famous for traditional Rajasthani jewelry, gems, and textiles.",
+    "image_url": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9196,
+    "longitude": 75.8266,
+    "avg_visit_duration_hours": 3.0,
+    "cost_estimate_inr": 200,
+    "best_visiting_time": "Evening",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1555529771-835f59bfc50c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Simran",
+        "rating": 4.5,
+        "text": "Best place to buy Kundan jewelry and Leheriya sarees. Bargain well!",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Neha",
+        "rating": 4.0,
+        "text": "Very crowded but has authentic Rajasthani vibes. Stop for Lassi at LMB.",
+        "date": "3 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Transport": 200
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 3.0,
+    "photography_score": 4.0,
+    "food_availability": 5.0,
+    "family_friendliness": 3.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 4.0,
+    "nightlife_score": 2.0,
+    "weather_sensitivity": 3.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "High-Energy Social Explorer",
+      "Cultural Depth Traveler"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Nahargarh Fort",
+    "city": "Jaipur",
+    "category": "Heritage",
+    "description": "Fort situated on the Aravalli hills overlooking the pink city of Jaipur, great for sunsets.",
+    "image_url": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9372,
+    "longitude": 75.8155,
+    "avg_visit_duration_hours": 2.5,
+    "cost_estimate_inr": 450,
+    "best_visiting_time": "Evening",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1582510003544-4d00b7f7415e?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Rajat",
+        "rating": 5.0,
+        "text": "The sunset view of the entire Jaipur city from here is unparalleled.",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "Pooja",
+        "rating": 4.5,
+        "text": "Padao restaurant at the fort has a cover charge but offers a great evening view.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 50,
+      "Transport (Taxi/Auto)": 400
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 3.0,
+    "photography_score": 5.0,
+    "food_availability": 4.0,
+    "family_friendliness": 4.0,
+    "adventure_level": 2.0,
+    "cultural_depth": 4.0,
+    "nightlife_score": 2.0,
+    "weather_sensitivity": 4.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "High-Energy Social Explorer",
+      "Budget Nature Seeker"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Albert Hall Museum",
+    "city": "Jaipur",
+    "category": "Heritage",
+    "description": "The oldest museum of the state, functioning as the State museum of Rajasthan.",
+    "image_url": "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9116,
+    "longitude": 75.8195,
+    "avg_visit_duration_hours": 2.0,
+    "cost_estimate_inr": 190,
+    "best_visiting_time": "Afternoon",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1629813580521-1f6b86ab32ea?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Aditya",
+        "rating": 4.5,
+        "text": "Looks beautiful at night when lit up! Great collection of artifacts.",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Sophie",
+        "rating": 4.0,
+        "text": "Indo-Saracenic architecture is stunning. The Egyptian mummy is a major attraction.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 40,
+      "Transport": 150
+    },
+    "crowd_density": 3.0,
+    "physical_intensity": 1.0,
+    "photography_score": 4.0,
+    "food_availability": 2.0,
+    "family_friendliness": 4.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 1.0,
+    "is_indoor": 1,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Comfort-Oriented Relaxer"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Chokhi Dhani",
+    "city": "Jaipur",
+    "category": "Culture",
+    "description": "A mock Rajasthani village offering traditional food, cultural performances, and activities.",
+    "image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.7667,
+    "longitude": 75.8252,
+    "avg_visit_duration_hours": 4.0,
+    "cost_estimate_inr": 800,
+    "best_visiting_time": "Night",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1582510003544-4d00b7f7415e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1555529771-835f59bfc50c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Vikas",
+        "rating": 4.5,
+        "text": "A complete cultural experience. The traditional Rajasthani thali is very heavy but delicious.",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "Emma",
+        "rating": 4.0,
+        "text": "Fun evening with magic shows, camel rides, and dances. Slightly expensive but worth a one-time visit.",
+        "date": "3 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Ticket": 700,
+      "Transport": 500,
+      "Activities": 100
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 2.0,
+    "photography_score": 4.0,
+    "food_availability": 5.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 4.0,
+    "nightlife_score": 3.0,
+    "weather_sensitivity": 3.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Comfort-Oriented Relaxer",
+      "Cultural Depth Traveler"
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Galtaji Temple (Monkey Temple)",
+    "city": "Jaipur",
+    "category": "Heritage",
+    "description": "Ancient Hindu pilgrimage site consisting of a series of temples built into a narrow crevice in the hills.",
+    "image_url": "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9168,
+    "longitude": 75.8587,
+    "avg_visit_duration_hours": 2.0,
+    "cost_estimate_inr": 250,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Nitin",
+        "rating": 4.0,
+        "text": "Very ancient and mystical place. Lots of monkeys, so hold onto your belongings.",
+        "date": "1 month ago"
+      },
+      {
+        "user": "Clara",
+        "rating": 4.5,
+        "text": "The holy water pools and the temple nestled in the hills offer a very spiritual vibe.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Camera Fee": 50,
+      "Transport": 200
+    },
+    "crowd_density": 3.0,
+    "physical_intensity": 3.0,
+    "photography_score": 5.0,
+    "food_availability": 1.0,
+    "family_friendliness": 3.0,
+    "adventure_level": 2.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 4.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Adventure-Focused Wanderer"
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Bapu Bazaar",
+    "city": "Jaipur",
+    "category": "Shopping",
+    "description": "Bustling market known for camel leather items, particularly traditional Mojari footwear.",
+    "image_url": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80",
+    "latitude": 26.9185,
+    "longitude": 75.8234,
+    "avg_visit_duration_hours": 2.0,
+    "cost_estimate_inr": 100,
+    "best_visiting_time": "Evening",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1555529771-835f59bfc50c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Shikha",
+        "rating": 4.5,
+        "text": "Excellent place to buy Mojaris (traditional shoes) and Jaipuri bedsheets.",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "Ravi",
+        "rating": 4.0,
+        "text": "Great street shopping experience. The pink buildings look beautiful. Remember to bargain.",
+        "date": "3 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Transport": 100
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 3.0,
+    "photography_score": 3.0,
+    "food_availability": 4.0,
+    "family_friendliness": 3.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 3.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 3.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "High-Energy Social Explorer",
+      "Cultural Depth Traveler"
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Solang Valley",
+    "city": "Manali",
+    "category": "Adventure",
+    "description": "A picturesque valley known for its summer and winter sport conditions, especially skiing and paragliding.",
+    "image_url": "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.3169,
+    "longitude": 77.1581,
+    "avg_visit_duration_hours": 4.0,
+    "cost_estimate_inr": 3300,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Nikhil",
+        "rating": 5.0,
+        "text": "The adventure hub of Manali! Paragliding was an unforgettable experience.",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Pooja",
+        "rating": 4.0,
+        "text": "Gets very crowded in peak season. Traffic jam on the way is common, start early.",
+        "date": "3 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Paragliding/Skiing": 2000,
+      "ATV Ride": 500,
+      "Winter Clothes Rent": 500,
+      "Transport": 300
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 4.0,
+    "photography_score": 5.0,
+    "food_availability": 3.0,
+    "family_friendliness": 4.0,
+    "adventure_level": 5.0,
+    "cultural_depth": 1.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 5.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Adventure-Focused Wanderer",
+      "High-Energy Social Explorer"
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Hadimba Devi Temple",
+    "city": "Manali",
+    "category": "Heritage",
+    "description": "Ancient cave temple dedicated to Hidimbi Devi, surrounded by a cedar forest.",
+    "image_url": "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.2464,
+    "longitude": 77.1824,
+    "avg_visit_duration_hours": 1.0,
+    "cost_estimate_inr": 150,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Amit",
+        "rating": 4.5,
+        "text": "Very serene temple surrounded by tall cedar trees. Unique wooden architecture.",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "Chloe",
+        "rating": 4.0,
+        "text": "Peaceful atmosphere. Be careful of the aggressive locals selling photos with rabbits/yaks.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Yaks/Photo op": 100,
+      "Transport": 50
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 1.0,
+    "photography_score": 4.0,
+    "food_availability": 2.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 4.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 3.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Comfort-Oriented Relaxer"
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Rohtang Pass",
+    "city": "Manali",
+    "category": "Nature",
+    "description": "High mountain pass on the eastern Pir Panjal Range connecting Kullu Valley with Lahaul and Spiti.",
+    "image_url": "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.3716,
+    "longitude": 77.2466,
+    "avg_visit_duration_hours": 6.0,
+    "cost_estimate_inr": 2000,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Gaurav",
+        "rating": 5.0,
+        "text": "Absolute heaven! Playing in the snow at 13000 ft was incredible. Spectacular views.",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Neha",
+        "rating": 4.0,
+        "text": "Need to book permits well in advance. The journey is scary but beautiful.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Permit & Transport (Shared Taxi)": 1500,
+      "Snow Dress Rent": 500
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 3.0,
+    "photography_score": 5.0,
+    "food_availability": 2.0,
+    "family_friendliness": 3.0,
+    "adventure_level": 4.0,
+    "cultural_depth": 1.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 5.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Adventure-Focused Wanderer",
+      "Budget Nature Seeker"
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Old Manali",
+    "city": "Manali",
+    "category": "Culture",
+    "description": "Quaint area with traditional houses, backpacker cafes, and artisan shops.",
+    "image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.253,
+    "longitude": 77.1818,
+    "avg_visit_duration_hours": 3.0,
+    "cost_estimate_inr": 100,
+    "best_visiting_time": "Evening",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Varun",
+        "rating": 5.0,
+        "text": "The hipster capital! Great live music cafes, bakeries, and cheap hippie clothes.",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "Jessica",
+        "rating": 4.5,
+        "text": "Much better vibe than the main Mall road. Dylan's Toasted & Roasted coffee is a must.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Transport (Tuk-tuk)": 100
+    },
+    "crowd_density": 3.0,
+    "physical_intensity": 2.0,
+    "photography_score": 4.0,
+    "food_availability": 5.0,
+    "family_friendliness": 3.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 3.0,
+    "nightlife_score": 4.0,
+    "weather_sensitivity": 3.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "High-Energy Social Explorer",
+      "Cultural Depth Traveler"
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Vashisht Hot Water Springs",
+    "city": "Manali",
+    "category": "Nature",
+    "description": "Natural hot sulfur springs with therapeutic properties, located near the Vashisht Temple.",
+    "image_url": "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.2618,
+    "longitude": 77.1956,
+    "avg_visit_duration_hours": 2.0,
+    "cost_estimate_inr": 100,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Manish",
+        "rating": 4.0,
+        "text": "Taking a dip in the natural hot springs is very relaxing, especially in cold weather.",
+        "date": "3 weeks ago"
+      },
+      {
+        "user": "Lisa",
+        "rating": 3.5,
+        "text": "The water is great but the changing rooms could be cleaner. The temple is nice.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Transport": 100
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 2.0,
+    "photography_score": 3.0,
+    "food_availability": 2.0,
+    "family_friendliness": 4.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 4.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 2.0,
+    "is_indoor": 1,
+    "recommended_archetypes": [
+      "Comfort-Oriented Relaxer",
+      "Cultural Depth Traveler"
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Jogini Waterfall",
+    "city": "Manali",
+    "category": "Nature",
+    "description": "Scenic waterfall accessible via a short trek through pine forests and apple orchards.",
+    "image_url": "https://images.unsplash.com/photo-1627896157734-4bcbfdfcc022?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.2778,
+    "longitude": 77.1887,
+    "avg_visit_duration_hours": 3.0,
+    "cost_estimate_inr": 100,
+    "best_visiting_time": "Afternoon",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1627896157734-4bcbfdfcc022?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1593006283731-de8a20235b2e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Aryan",
+        "rating": 5.0,
+        "text": "A beautiful 1-hour trek from Vashisht. The waterfall is massive and secluded.",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "Geeta",
+        "rating": 4.5,
+        "text": "Very pristine and peaceful. Best to carry your own water bottle and snacks.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Transport to Vashisht": 100
+    },
+    "crowd_density": 2.0,
+    "physical_intensity": 4.0,
+    "photography_score": 5.0,
+    "food_availability": 1.0,
+    "family_friendliness": 2.0,
+    "adventure_level": 3.0,
+    "cultural_depth": 1.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 4.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Budget Nature Seeker",
+      "Adventure-Focused Wanderer"
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Manikaran Sahib",
+    "city": "Manali",
+    "category": "Heritage",
+    "description": "Prominent Sikh pilgrimage center known for its hot springs and langar (community kitchen).",
+    "image_url": "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.0272,
+    "longitude": 77.3468,
+    "avg_visit_duration_hours": 4.0,
+    "cost_estimate_inr": 500,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Ramesh",
+        "rating": 5.0,
+        "text": "Very spiritual place. The hot springs are boiling, and the langar food is amazing.",
+        "date": "1 week ago"
+      },
+      {
+        "user": "Sunita",
+        "rating": 4.5,
+        "text": "Beautiful location in the Parvati valley. The hot caves are a unique experience.",
+        "date": "3 weeks ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 0,
+      "Donation/Langar": 100,
+      "Transport from Manali (Bus/Taxi)": 400
+    },
+    "crowd_density": 4.0,
+    "physical_intensity": 2.0,
+    "photography_score": 4.0,
+    "food_availability": 4.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 3.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Comfort-Oriented Relaxer"
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Mall Road",
+    "city": "Manali",
+    "category": "Shopping",
+    "description": "The main street in Manali, lined with hotels, restaurants, shops, and cafes.",
+    "image_url": "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.2432,
+    "longitude": 77.1892,
+    "avg_visit_duration_hours": 2.5,
+    "cost_estimate_inr": 100,
+    "best_visiting_time": "Evening",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Deepak",
+        "rating": 4.0,
+        "text": "Good for evening strolls and buying local souvenirs. Try the softy ice cream!",
+        "date": "2 weeks ago"
+      },
+      {
+        "user": "Maria",
+        "rating": 4.5,
+        "text": "Very busy, but has all the restaurants and shops you need. Great winter wear options.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Transport": 100
+    },
+    "crowd_density": 5.0,
+    "physical_intensity": 2.0,
+    "photography_score": 3.0,
+    "food_availability": 5.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 2.0,
+    "nightlife_score": 3.0,
+    "weather_sensitivity": 4.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Comfort-Oriented Relaxer",
+      "High-Energy Social Explorer"
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Bhrigu Lake",
+    "city": "Manali",
+    "category": "Adventure",
+    "description": "High altitude glacial lake offering spectacular views of the Pir Panjal range.",
+    "image_url": "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.3023,
+    "longitude": 77.2345,
+    "avg_visit_duration_hours": 8.0,
+    "cost_estimate_inr": 2000,
+    "best_visiting_time": "Morning",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Trekker_Raj",
+        "rating": 5.0,
+        "text": "An arduous but absolutely rewarding trek. The high altitude meadows and the lake are pristine.",
+        "date": "1 month ago"
+      },
+      {
+        "user": "Jason",
+        "rating": 4.5,
+        "text": "Requires good fitness. The views of the Pir Panjal range are breathtaking.",
+        "date": "2 months ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Trek Guide/Package": 1500,
+      "Transport to Base": 500
+    },
+    "crowd_density": 1.0,
+    "physical_intensity": 5.0,
+    "photography_score": 5.0,
+    "food_availability": 1.0,
+    "family_friendliness": 1.0,
+    "adventure_level": 5.0,
+    "cultural_depth": 2.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 5.0,
+    "is_indoor": 0,
+    "recommended_archetypes": [
+      "Adventure-Focused Wanderer",
+      "Budget Nature Seeker"
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Naggar Castle",
+    "city": "Manali",
+    "category": "Heritage",
+    "description": "Historic castle made of wood and stone, offering panoramic views of the Kullu Valley.",
+    "image_url": "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80",
+    "latitude": 32.1158,
+    "longitude": 77.1706,
+    "avg_visit_duration_hours": 2.0,
+    "cost_estimate_inr": 230,
+    "best_visiting_time": "Afternoon",
+    "image_urls": [
+      "https://images.unsplash.com/photo-1542898864-1065191c9533?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1599661559882-6cb0511874eb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1582510003544-4d00b7f7415e?auto=format&fit=crop&w=800&q=80"
+    ],
+    "reviews": [
+      {
+        "user": "Kabir",
+        "rating": 4.5,
+        "text": "Beautiful wooden architecture. Made famous by the movie Jab We Met. Excellent valley views.",
+        "date": "3 weeks ago"
+      },
+      {
+        "user": "Sonia",
+        "rating": 4.0,
+        "text": "Very quaint and historic. The Roerich Art Gallery nearby is also a must-visit.",
+        "date": "1 month ago"
+      }
+    ],
+    "cost_breakdown": {
+      "Entry Fee": 30,
+      "Transport": 200
+    },
+    "crowd_density": 2.0,
+    "physical_intensity": 1.0,
+    "photography_score": 5.0,
+    "food_availability": 3.0,
+    "family_friendliness": 5.0,
+    "adventure_level": 1.0,
+    "cultural_depth": 5.0,
+    "nightlife_score": 1.0,
+    "weather_sensitivity": 2.0,
+    "is_indoor": 1,
+    "recommended_archetypes": [
+      "Cultural Depth Traveler",
+      "Comfort-Oriented Relaxer"
+    ]
+  }
+]

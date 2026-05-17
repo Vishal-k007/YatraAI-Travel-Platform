@@ -2,7 +2,8 @@
 Seed data script to populate the database with attractions.
 Contains ~60 real attractions across Goa, Jaipur, and Manali.
 """
-import random
+import json
+import os
 from models import Attraction, User, TravelerProfile
 from auth import hash_password
 
@@ -10,6 +11,79 @@ from auth import hash_password
 def get_archetypes(primary, *others):
     archetypes = [primary] + list(others)
     return archetypes
+
+def enrich_attraction_data(attr_data):
+    # 1. Place images from curated map (run apply_curated_images.py after seeding)
+    curated_path = os.path.join(os.path.dirname(__file__), "place_images_curated.json")
+    image_set = False
+    if os.path.exists(curated_path):
+        with open(curated_path, encoding="utf-8") as f:
+            curated = json.load(f)
+        urls = curated.get(attr_data["name"])
+        if urls:
+            from urllib.parse import urlparse, urlunparse
+            clean = [urlunparse(urlparse(u)._replace(query="", fragment="")) for u in urls[:3]]
+            while len(clean) < 3:
+                clean.append(clean[0])
+            attr_data["image_urls"] = clean
+            attr_data["image_url"] = clean[0]
+            image_set = True
+    if not image_set:
+        image_seed = attr_data['name'].replace(' ', '')
+        image_urls = [
+            f"https://picsum.photos/seed/{image_seed}1/800/600",
+            f"https://picsum.photos/seed/{image_seed}2/800/600",
+            f"https://picsum.photos/seed/{image_seed}3/800/600",
+        ]
+        attr_data["image_urls"] = image_urls
+        attr_data["image_url"] = image_urls[0]
+
+    # 2. Real-time Reviews
+    names = ["Rahul", "Priya", "Amit", "Sneha", "Karan", "Anjali", "Vikram", "Riya", "Rohan", "Neha", "Aditya", "Pooja"]
+    positive_comments = [
+        "Absolutely amazing experience! The vibe was fantastic.",
+        "A must-visit if you're in the city. Truly breathtaking.",
+        "Loved the atmosphere and the views. Highly recommended.",
+        "Great place to spend time with family and friends. Worth every penny.",
+        "The architecture and history here is just mind-blowing.",
+        "One of the best spots! Don't miss this.",
+        "A bit crowded during peak hours, but still very enjoyable.",
+        "Perfect place for photography. Got some amazing shots!",
+        "The local food nearby is incredibly delicious.",
+        "Such a peaceful and serene environment. Will definitely come back."
+    ]
+    num_reviews = random.randint(3, 7)
+    reviews = []
+    for _ in range(num_reviews):
+        days_ago = random.randint(1, 14)
+        review_date = (datetime.now() - timedelta(days=days_ago)).strftime("%Y-%m-%d")
+        reviews.append({
+            "user": random.choice(names),
+            "rating": random.choice([4, 4.5, 5]),
+            "text": random.choice(positive_comments),
+            "date": review_date
+        })
+    # Sort reviews by date descending (simulating real-time recent reviews)
+    reviews.sort(key=lambda x: x["date"], reverse=True)
+    attr_data["reviews"] = reviews
+    
+    # 3. Realistic Cost Breakdown
+    base_cost = attr_data.get("cost_estimate_inr", 0)
+    if base_cost == 0:
+        attr_data["cost_breakdown"] = {"Entry Fee": "Free", "Transport": 150, "Food & Snacks": 350}
+        attr_data["cost_estimate_inr"] = 500  # realistic total cost
+    else:
+        # Provide a more realistic breakdown for paid attractions
+        transport = int(base_cost * 0.2)
+        food = int(base_cost * 0.4)
+        entry_or_activity = base_cost - transport - food
+        attr_data["cost_breakdown"] = {
+            "Entry/Activity Fee": entry_or_activity,
+            "Transport": transport,
+            "Food & Drinks": food
+        }
+        
+    return attr_data
 
 # --- Goa Attractions ---
 GOA_ATTRACTIONS = [
@@ -299,8 +373,16 @@ def seed_database(db_session):
     """Inserts seed attractions into the database if empty."""
     count = db_session.query(Attraction).count()
     if count == 0:
-        print(f"Seeding database with {len(ALL_ATTRACTIONS)} attractions...")
-        for attr_data in ALL_ATTRACTIONS:
+        real_data_path = os.path.join(os.path.dirname(__file__), 'real_data.json')
+        if os.path.exists(real_data_path):
+            with open(real_data_path, 'r', encoding='utf-8') as f:
+                all_attractions_data = json.load(f)
+        else:
+            # Fallback
+            all_attractions_data = ALL_ATTRACTIONS
+
+        print(f"Seeding database with {len(all_attractions_data)} attractions...")
+        for attr_data in all_attractions_data:
             attraction = Attraction(**attr_data)
             db_session.add(attraction)
         db_session.commit()

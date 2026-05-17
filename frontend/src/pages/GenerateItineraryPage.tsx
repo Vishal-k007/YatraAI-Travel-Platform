@@ -14,6 +14,8 @@ const GenerateItineraryPage: React.FC = () => {
   const [city, setCity] = useState('');
   const [days, setDays] = useState<number>(3);
   const [budget, setBudget] = useState<number>(10000);
+  const [stayBudget, setStayBudget] = useState<number>(1000);
+  const [foodBudget, setFoodBudget] = useState<number>(1000);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -32,7 +34,9 @@ const GenerateItineraryPage: React.FC = () => {
       const response = await apiClient.post('/itineraries/generate', {
         city: city,
         num_days: days,
-        budget_total: budget
+        budget_total: budget,
+        stay_budget_per_night: stayBudget,
+        food_budget_per_day: foodBudget
       });
       
       // Redirect to the newly generated itinerary details page
@@ -176,6 +180,50 @@ const GenerateItineraryPage: React.FC = () => {
                     />
                   </div>
                   <p className="text-xs text-slate-500 mt-2">This budget covers activities and internal travel (excluding flights/hotels).</p>
+                </div>
+
+                {/* Stay Budget */}
+                <div>
+                  <label className="block text-lg font-medium text-slate-900 dark:text-white mb-4 flex items-center">
+                    <IndianRupee className="w-5 h-5 mr-2 text-primary-500" /> Stay Budget Per Night (INR)
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <span className="text-slate-500 font-medium">₹</span>
+                    </div>
+                    <input 
+                      type="number" 
+                      min="500"
+                      max="2000"
+                      step="100"
+                      value={stayBudget}
+                      onChange={(e) => setStayBudget(parseInt(e.target.value))}
+                      className="input-field pl-10 text-lg font-medium"
+                    />
+                  </div>
+                  <p className="text-xs text-slate-500 mt-2">Suggested stay options per night based on your budget (500 - 2000).</p>
+                </div>
+
+                {/* Food Budget */}
+                <div>
+                  <label className="block text-lg font-medium text-slate-900 dark:text-white mb-4 flex items-center">
+                    <IndianRupee className="w-5 h-5 mr-2 text-primary-500" /> Food Budget Per Day (INR)
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <span className="text-slate-500 font-medium">₹</span>
+                    </div>
+                    <input 
+                      type="number" 
+                      min="500"
+                      max="2000"
+                      step="100"
+                      value={foodBudget}
+                      onChange={(e) => setFoodBudget(parseInt(e.target.value))}
+                      className="input-field pl-10 text-lg font-medium"
+                    />
+                  </div>
+                  <p className="text-xs text-slate-500 mt-2">Personalized restaurant suggestions per day (500 - 2000).</p>
                 </div>
 
                 <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
